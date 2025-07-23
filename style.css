@@ -103,3 +103,31 @@ h1.rainbow-text {
   0% { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
 }
+
+.card.sparkle {
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px hotpink;
+  width: 250px;
+  text-align: center;
+  font-size: 1rem;
+  animation: flicker 3s infinite;
+  transition: transform 0.3s;
+}
+.card.sparkle:hover {
+  transform: scale(1.1) rotate(1deg);
+  box-shadow: 0 0 25px deeppink;
+}
+
+/* 캐릭터별 배경 색 */
+.card.kimsuuk { background: #ffe4c4; }     /* 베이지 */
+.card.ansaehyung { background: #d0f0c0; }  /* 연두 */
+.card.leejaehyun { background: #e6ccff; }  /* 연보라 */
+.card.jeonwoocheol { background: #ffd1dc; }/* 핑크 */
+.card.jungwooju { background: #ccf2ff; }   /* 하늘 */
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
