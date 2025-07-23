@@ -2,131 +2,19 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>형석고 유니버스</title>
-  <style>
-    body {
-      background: linear-gradient(135deg, pink, yellow, skyblue);
-      font-family: 'Comic Sans MS', cursive;
-      text-align: center;
-      padding: 60px 20px;
-      overflow-x: hidden;
-      animation: bgmove 10s infinite alternate;
-    }
-
-    @keyframes bgmove {
-      0% { background-position: 0% 0%; }
-      100% { background-position: 100% 100%; }
-    }
-
-    h1 {
-      font-size: 3em;
-      color: magenta;
-      text-shadow: 3px 3px 0 yellow;
-      animation: flash 2s infinite alternate;
-    }
-
-    @keyframes flash {
-      0% { text-shadow: 0 0 5px yellow, 0 0 10px hotpink; }
-      100% { text-shadow: 0 0 20px magenta, 0 0 30px cyan; }
-    }
-
-    .circle-container {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin: 30px auto;
-    }
-
-    .circle {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 8px dotted red;
-      background-color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: bounce 3s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
-
-    .circle img {
-      max-width: 140px;
-      max-height: 140px;
-    }
-
-    .warning {
-      font-size: 1.3em;
-      background-color: black;
-      color: lime;
-      padding: 12px;
-      border: 5px dotted yellow;
-      margin: 25px auto 15px;
-      width: 80%;
-      animation: flash 1.5s infinite alternate;
-    }
-
-    .ghost-story {
-      font-size: 1.2em;
-      background-color: darkred;
-      color: white;
-      padding: 10px;
-      margin: 0 auto 30px;
-      border: 4px double white;
-      width: 70%;
-      animation: glow 2s infinite alternate;
-    }
-
-    @keyframes glow {
-      from { box-shadow: 0 0 5px white; }
-      to { box-shadow: 0 0 20px white; }
-    }
-
-    .start-button {
-      font-size: 1.5em;
-      padding: 15px 35px;
-      background: limegreen;
-      color: white;
-      border: 6px solid hotpink;
-      border-radius: 20px;
-      cursor: pointer;
-      text-decoration: none;
-      box-shadow: 5px 5px 15px magenta;
-      font-weight: bold;
-      animation: wiggle 2s infinite;
-    }
-
-    @keyframes wiggle {
-      0%, 100% { transform: rotate(-1deg); }
-      50% { transform: rotate(1deg); }
-    }
-
-    .start-button:hover {
-      background: orange;
-      color: black;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>형석고 유니버스</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
-<body>
-  <h1>🎀 형석고 유니버스 🎀</h1>
-
-  <div class="circle-container">
-    <div class="circle">
-      <img src="assets/hshu_logo.png" alt="HSHU 로고">
+<body class="main">
+    <h1 class="rainbow-text">🎀 형석고 유니버스 🎀</h1>
+    <div class="logo-container">
+        <div class="circle"><img src="./assets/hshu_logo.png" alt="HSHU 로고"></div>
+        <div class="circle"><img src="./assets/hshu_flag.png" alt="HSHU 깃발"></div>
     </div>
-    <div class="circle">
-      <img src="assets/hshu_flag.png" alt="HSHU 깃발">
-    </div>
-  </div>
-
-  <div class="warning">⚠️ 오늘의 급식은 꼭 전다은에게서 보호하시길…!</div>
-  <div class="ghost-story">👻 오늘의 급식 괴담: 전다은은 언제쯤 배가 부를까..?</div>
-
-  <a href="characters.html" class="start-button">등장인물 소개 ➜</a>
+    <div class="warning">⚠️ 오늘의 급식은 꼭 전다은에게서 보호하시길…!</div>
+    <div class="ghost-story">👻 오늘의 급식 괴담: 전다은은 언제쯤 배가 부를까..?</div>
+    <a href="characters.html" class="character-button">등장인물 소개 ➤</a>
 </body>
 </html>
