@@ -1,7 +1,12 @@
 
-function goBack() {
-    document.body.classList.add('exit');
-    setTimeout(() => {
-        window.location.href = "index.html";
-    }, 500);
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const backBtn = document.querySelector(".back-button");
+  if (backBtn) {
+    backBtn.addEventListener("mouseenter", () => {
+      backBtn.classList.add("wiggle");
+    });
+    backBtn.addEventListener("mouseleave", () => {
+      backBtn.classList.remove("wiggle");
+    });
+  }
+});

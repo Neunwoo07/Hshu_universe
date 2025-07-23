@@ -1,122 +1,105 @@
 
 body {
-    font-family: 'Comic Sans MS', cursive;
-    margin: 0;
-    padding: 20px;
-    background: linear-gradient(45deg, #fef9a7, #ffb3c1, #b5ead7);
-    animation: backgroundShift 10s infinite;
-    text-align: center;
+  margin: 0;
+  font-family: 'Comic Sans MS', '굴림', cursive;
+  background: radial-gradient(circle, #fffbe6, #ffe0f0, #d0f0ff);
+  animation: shimmer 10s infinite alternate;
+  overflow-x: hidden;
 }
 
-@keyframes backgroundShift {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
-}
-
-.rainbow-text {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #fff;
-    animation: glow 1.5s infinite alternate;
-}
-
-@keyframes glow {
-    from { text-shadow: 0 0 10px #ff0, 0 0 20px #f0f; }
-    to { text-shadow: 0 0 20px #0ff, 0 0 30px #0f0; }
+h1.rainbow-text {
+  text-align: center;
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: glow 2s infinite;
 }
 
 .logo-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin: 20px;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  gap: 50px;
 }
 
 .circle {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 5px dotted hotpink;
-    animation: spin 8s linear infinite;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 25px pink;
+  overflow: hidden;
 }
 
-.circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+.spin {
+  animation: spin 10s linear infinite;
 }
 
 .warning, .ghost-story {
-    font-size: 1.3rem;
-    margin-top: 20px;
-    padding: 10px;
-    border: 3px dashed #ff0;
-    background-color: #000;
-    color: #0f0;
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  font-weight: bold;
+  color: darkred;
 }
 
 .ghost-story {
-    background-color: #900;
-    color: #fff;
+  color: purple;
 }
 
-.character-button {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 15px 25px;
-    background-color: #fffb00;
-    color: #000;
-    font-weight: bold;
-    border-radius: 10px;
-    text-decoration: none;
-    animation: pulse 2s infinite;
-    box-shadow: 0 0 10px #f0f;
+.character-button, .back-button {
+  display: block;
+  margin: 30px auto;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  background: yellow;
+  border: 3px dashed hotpink;
+  text-decoration: none;
+  color: black;
+  border-radius: 15px;
+  box-shadow: 0 0 20px hotpink;
+  animation: pulse 1.5s infinite;
+  transition: transform 0.3s;
+}
+
+.character-button:hover, .back-button:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+
+.character-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.back-wrapper {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes glow {
+  0% { text-shadow: 0 0 5px white; }
+  100% { text-shadow: 0 0 25px yellow; }
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+  0% { box-shadow: 0 0 10px hotpink; }
+  50% { box-shadow: 0 0 30px deeppink; }
+  100% { box-shadow: 0 0 10px hotpink; }
 }
 
-.card {
-    background-color: #fff8dc;
-    border: 4px dotted pink;
-    padding: 20px;
-    margin: 20px auto;
-    width: 80%;
-    max-width: 400px;
-    animation: cardEnter 1s ease-out;
-}
-
-.card img {
-    width: 100%;
-    border-radius: 15px;
-    margin-top: 10px;
-}
-
-@keyframes cardEnter {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.back-button {
-    margin-top: 30px;
-    padding: 10px 20px;
-    background-color: #aaf;
-    border: 2px dashed blue;
-    font-size: 1rem;
-    animation: shake 1s infinite alternate;
-    cursor: pointer;
-}
-
-@keyframes shake {
-    0% { transform: rotate(-2deg); }
-    100% { transform: rotate(2deg); }
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
