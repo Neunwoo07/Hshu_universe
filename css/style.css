@@ -96,3 +96,68 @@ body {
   border: 10px solid #ff69b4;
   box-shadow: 0 0 50px pink;
 }
+
+.title-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  gap: 40px;
+}
+
+.spin-icon {
+  width: 80px;
+  height: 80px;
+  animation: rotate 6s linear infinite;
+}
+
+.spin-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.blinking-title {
+  font-size: 36px;
+  color: hotpink;
+  animation: sparkle 1.5s infinite alternate;
+  font-weight: bold;
+}
+
+.family-cards {
+  margin: 40px auto;
+  width: 90%;
+}
+
+.family-card {
+  background: #fff0f5;
+  border: 5px dashed #ff69b4;
+  padding: 20px;
+  margin-bottom: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px pink;
+  text-align: left;
+  font-size: 20px;
+  animation: sparkle 2s infinite alternate;
+}
+
+.family-card h2 {
+  font-size: 26px;
+  color: #ff1493;
+  margin-bottom: 15px;
+}
+
+.family-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.caption {
+  font-style: italic;
+  margin-top: 10px;
+  color: #c71585;
+}
