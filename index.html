@@ -2,20 +2,64 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>형석고 유니버스</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      background: linear-gradient(to right, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+      text-align: center;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+    h1 {
+      font-size: 3em;
+      color: #ff00ff;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff00ff; }
+      to { text-shadow: 0 0 20px #ffff33; }
+    }
+    .circle {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin: 10px;
+      display: inline-block;
+      overflow: hidden;
+      border: 10px dotted yellow;
+      animation: spin 10s linear infinite;
+    }
+    .circle img {
+      width: 100%;
+      height: auto;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .button {
+      display: inline-block;
+      padding: 15px 25px;
+      font-size: 20px;
+      margin: 20px;
+      cursor: pointer;
+      background-color: #ffff00;
+      color: black;
+      border: 5px dashed magenta;
+      animation: flash 1s infinite alternate;
+    }
+    @keyframes flash {
+      from { background-color: #ffff00; }
+      to { background-color: #ff00ff; color: white; }
+    }
+  </style>
 </head>
-<body class="main">
-  <div class="logo-container">
-    <div class="circle"><img src="images/logo.png" alt="로고"></div>
-    <div class="circle"><img src="images/flag.png" alt="깃발"></div>
-  </div>
-  <div class="warning">
-    <p>⚠️ 오늘의 급식은 꼭 전다은에게서 보호하시길…!</p>
-    <p>👻 오늘의 급식 괴담: <strong>전다은은 언제쯤 배가 부를까...?</strong></p>
-  </div>
-  <a class="button" href="characters.html">등장인물 소개</a>
-  <a class="button" href="family.html">가족 계보도 보기</a>
+<body>
+  <h1>🌟 형석고 유니버스 🌟</h1>
+  <div class="circle"><img src="logo.png" alt="HSHU 로고"></div>
+  <div class="circle"><img src="flag.png" alt="HSHU 깃발"></div>
+  <p>⚠️ 오늘의 급식은 꼭 전다은에게서 보호하시길…!</p>
+  <p>👻 오늘의 급식 괴담: 전다은은 언제쯤 배가 부를까..?</p>
+  <div><a href="characters.html" class="button">✨ 등장인물 소개 ▶</a></div>
 </body>
 </html>
