@@ -3,40 +3,62 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>형석고 가족 계보도</title>
+  <title>가족 계보도 - 형석고 유니버스</title>
   <style>
     body {
-      background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
+      background: linear-gradient(to right, #ffe6f0, #e6f0ff);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
       text-align: center;
-      font-family: 'Comic Sans MS', cursive;
     }
     h1 {
       font-size: 2.5em;
       color: #ff69b4;
-      animation: glow 2s infinite alternate;
+      animation: glow 1.5s ease-in-out infinite alternate;
+      text-shadow: 0 0 10px #ff69b4, 0 0 20px #ffff33;
     }
     @keyframes glow {
       from { text-shadow: 0 0 5px #ff69b4; }
-      to { text-shadow: 0 0 15px #ffffff; }
+      to { text-shadow: 0 0 15px #ffff33; }
+    }
+    .circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 10px;
+      border: 6px dotted #ffcc00;
+      animation: spin 10s linear infinite;
+      display: inline-block;
+    }
+    .circle img {
+      width: 100%;
+      height: auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
     .back-button {
-      margin-top: 20px;
-      padding: 10px;
-      background-color: yellow;
-      border: 2px dashed red;
+      padding: 12px 20px;
       font-size: 18px;
+      margin-top: 20px;
+      border: 3px dashed red;
+      background-color: yellow;
       animation: flash 1s infinite alternate;
+      display: inline-block;
     }
     @keyframes flash {
       from { background-color: yellow; }
-      to { background-color: hotpink; }
+      to { background-color: hotpink; color: white; }
     }
   </style>
 </head>
 <body>
   <h1>형석고 유니버스 가족 계보도</h1>
-  <img src="family_tree_fixed.jpeg" alt="형석고 가족 계보도" width="90%">
-  <br>
-  <a href="index.html" class="back-button">◀ 돌아가기</a>
+  <div class="circle"><img src="logo.png" alt="로고"></div>
+  <div class="circle"><img src="flag.png" alt="깃발"></div>
+  <br><br>
+  <img src="family_tree_fixed.jpeg" width="90%" alt="형석고 가족 계보도">
+  <br><br>
+  <a href="index.html" class="back-button">◀ 메인으로 돌아가기</a>
 </body>
 </html>

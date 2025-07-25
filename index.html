@@ -6,28 +6,32 @@
   <title>형석고 유니버스</title>
   <style>
     body {
-      background: linear-gradient(to right, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
-      text-align: center;
+      background: linear-gradient(135deg, #ffccff, #ffffcc, #ccffff);
       font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
     }
-    h1 {
-      font-size: 3em;
-      color: #ff00ff;
-      animation: glow 2s infinite alternate;
+    h1, p {
+      color: #fff;
+      text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ffff00;
+      animation: glow 2s ease-in-out infinite alternate;
     }
     @keyframes glow {
-      from { text-shadow: 0 0 10px #ff00ff; }
-      to { text-shadow: 0 0 20px #ffff33; }
+      from {
+        text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+      }
+      to {
+        text-shadow: 0 0 20px #ffff00, 0 0 30px #ff00ff;
+      }
     }
     .circle {
       width: 200px;
       height: 200px;
       border-radius: 50%;
-      margin: 10px;
       display: inline-block;
       overflow: hidden;
-      border: 10px dotted yellow;
-      animation: spin 10s linear infinite;
+      border: 10px dashed #ffcc00;
+      margin: 10px;
+      animation: spin 12s linear infinite;
     }
     .circle img {
       width: 100%;
@@ -38,28 +42,30 @@
       to { transform: rotate(360deg); }
     }
     .button {
-      display: inline-block;
-      padding: 15px 25px;
-      font-size: 20px;
-      margin: 20px;
-      cursor: pointer;
+      font-size: 24px;
+      padding: 15px 30px;
+      border: 4px dashed #ff00ff;
       background-color: #ffff00;
-      color: black;
-      border: 5px dashed magenta;
-      animation: flash 1s infinite alternate;
+      color: #000;
+      animation: blink 1.2s infinite alternate;
+      margin-top: 20px;
+      display: inline-block;
+      text-decoration: none;
     }
-    @keyframes flash {
+    @keyframes blink {
       from { background-color: #ffff00; }
-      to { background-color: #ff00ff; color: white; }
+      to { background-color: #ff99ff; color: white; }
     }
   </style>
 </head>
 <body>
-  <h1>🌟 형석고 유니버스 🌟</h1>
-  <div class="circle"><img src="logo.png" alt="HSHU 로고"></div>
-  <div class="circle"><img src="flag.png" alt="HSHU 깃발"></div>
+  <h1>🎉 형석고 유니버스에 오신 걸 환영합니다 🎉</h1>
+  <div class="circle"><img src="logo.png" alt="형석고 로고"></div>
+  <div class="circle"><img src="flag.png" alt="형석고 깃발"></div>
   <p>⚠️ 오늘의 급식은 꼭 전다은에게서 보호하시길…!</p>
   <p>👻 오늘의 급식 괴담: 전다은은 언제쯤 배가 부를까..?</p>
-  <div><a href="characters.html" class="button">✨ 등장인물 소개 ▶</a></div>
+  <a href="characters.html" class="button">👾 등장인물 소개 ▶</a>
+  <br><br>
+  <a href="family.html" class="button">💀 가족 관계도 보기 ▶</a>
 </body>
 </html>
