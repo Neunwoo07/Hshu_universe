@@ -2,70 +2,17 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>형석고 유니버스</title>
-  <style>
-    body {
-      background: linear-gradient(135deg, #ffccff, #ffffcc, #ccffff);
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      text-align: center;
-    }
-    h1, p {
-      color: #fff;
-      text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ffff00;
-      animation: glow 2s ease-in-out infinite alternate;
-    }
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
-      }
-      to {
-        text-shadow: 0 0 20px #ffff00, 0 0 30px #ff00ff;
-      }
-    }
-    .circle {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      display: inline-block;
-      overflow: hidden;
-      border: 10px dashed #ffcc00;
-      margin: 10px;
-      animation: spin 12s linear infinite;
-    }
-    .circle img {
-      width: 100%;
-      height: auto;
-    }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    .button {
-      font-size: 24px;
-      padding: 15px 30px;
-      border: 4px dashed #ff00ff;
-      background-color: #ffff00;
-      color: #000;
-      animation: blink 1.2s infinite alternate;
-      margin-top: 20px;
-      display: inline-block;
-      text-decoration: none;
-    }
-    @keyframes blink {
-      from { background-color: #ffff00; }
-      to { background-color: #ff99ff; color: white; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>형석고 유니버스</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <h1>🎉 형석고 유니버스에 오신 걸 환영합니다 🎉</h1>
-  <div class="circle"><img src="logo.png" alt="형석고 로고"></div>
-  <div class="circle"><img src="flag.png" alt="형석고 깃발"></div>
-  <p>⚠️ 오늘의 급식은 꼭 전다은에게서 보호하시길…!</p>
-  <p>👻 오늘의 급식 괴담: 전다은은 언제쯤 배가 부를까..?</p>
-  <a href="characters.html" class="button">👾 등장인물 소개 ▶</a>
-  <br><br>
-  <a href="family.html" class="button">💀 가족 관계도 보기 ▶</a>
+<body class="background">
+    <div class="logo-container">
+        <div class="circle rotate"><img src="assets/images/logo.png" class="circle-img"></div>
+        <div class="circle rotate"><img src="assets/images/flag.png" class="circle-img"></div>
+    </div>
+    <p class="shiny warning">⚠️ 오늘의 급식은 꼭 전다은에게서 보호하시길…!</p>
+    <p class="shiny ghost">👻 오늘의 급식 괴담: 전다은은 언제쯤 배가 부를까..?</p>
+    <a href="family.html" class="shiny button">✨ 가족 관계도 보기 ➤</a>
 </body>
 </html>

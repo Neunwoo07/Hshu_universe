@@ -2,63 +2,30 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>가족 계보도 - 형석고 유니버스</title>
-  <style>
-    body {
-      background: linear-gradient(to right, #ffe6f0, #e6f0ff);
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      text-align: center;
-    }
-    h1 {
-      font-size: 2.5em;
-      color: #ff69b4;
-      animation: glow 1.5s ease-in-out infinite alternate;
-      text-shadow: 0 0 10px #ff69b4, 0 0 20px #ffff33;
-    }
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #ff69b4; }
-      to { text-shadow: 0 0 15px #ffff33; }
-    }
-    .circle {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      margin: 10px;
-      border: 6px dotted #ffcc00;
-      animation: spin 10s linear infinite;
-      display: inline-block;
-    }
-    .circle img {
-      width: 100%;
-      height: auto;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    .back-button {
-      padding: 12px 20px;
-      font-size: 18px;
-      margin-top: 20px;
-      border: 3px dashed red;
-      background-color: yellow;
-      animation: flash 1s infinite alternate;
-      display: inline-block;
-    }
-    @keyframes flash {
-      from { background-color: yellow; }
-      to { background-color: hotpink; color: white; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>형석고 가족 계보도</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <h1>형석고 유니버스 가족 계보도</h1>
-  <div class="circle"><img src="logo.png" alt="로고"></div>
-  <div class="circle"><img src="flag.png" alt="깃발"></div>
-  <br><br>
-  <img src="family_tree_fixed.jpeg" width="90%" alt="형석고 가족 계보도">
-  <br><br>
-  <a href="index.html" class="back-button">◀ 메인으로 돌아가기</a>
+<body class="background">
+    <h1 class="shiny">형석고 유니버스 가족 계보도</h1>
+    <div class="card-container">
+        <div class="card pink">연은숙<br><small>꼬꼬빌 청소부 / 전우철의 엄마</small></div>
+        <div class="card orange">전홍기<br><small>집에서 놀고 먹는 백수 / 전우철의 아빠</small></div>
+        <div class="card red">전우철<br><small>고3 / YES 아들</small></div>
+        <div class="card yellow">전다은<br><small>형석고 퇴학 / 인간 판다 / 인기 없음</small></div>
+        <div class="card blue">정우주<br><small>고3 / 인민군 아들</small></div>
+        <div class="card lightblue">정하늘<br><small>형 / 정우주네 가족</small></div>
+        <div class="card lightgreen">정자연<br><small>누나 / 정우주네 가족</small></div>
+        <div class="card green">정자왕<br><small>막내 / 정우주네 가족</small></div>
+        <div class="card purple">김수욱<br><small>아랍인 별명 / 옆집 전여친?</small></div>
+        <div class="card grey">김광수<br><small>형 / "미친 물"</small></div>
+        <div class="card olive">안세형<br><small>고3 / 까무잡잡, 무릎 점</small></div>
+        <div class="card brown">안철근<br><small>아빠 / 풀무원 배달부</small></div>
+        <div class="card orange">김소연<br><small>엄마 / 안세형에게 잡혀삼</small></div>
+        <div class="card red">안재혁<br><small>형 / 폐급 병장</small></div>
+        <div class="card grey">이재현<br><small>고3 / 유치함 / 이재민 동생</small></div>
+        <div class="card red">이재민<br><small>형 / 요리사 / 혼자 다 먹음</small></div>
+    </div>
+    <a href="index.html" class="shiny button">⬅ 돌아가기</a>
 </body>
 </html>
