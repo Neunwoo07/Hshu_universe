@@ -1,0 +1,98 @@
+
+body {
+  margin: 0;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  background: #fff5f7;
+  color: #333;
+  text-align: center;
+}
+
+.main .logo-container {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  margin-top: 80px;
+}
+
+.circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: white;
+  border: 10px dotted #ff69b4;
+  overflow: hidden;
+  box-shadow: 0 0 30px hotpink;
+}
+
+.circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.warning {
+  margin-top: 50px;
+  font-size: 24px;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+.button {
+  display: inline-block;
+  margin: 30px;
+  padding: 20px 30px;
+  font-size: 24px;
+  background: yellow;
+  border: 4px dashed #ff1493;
+  border-radius: 12px;
+  text-decoration: none;
+  color: black;
+  animation: sparkle 2s infinite;
+}
+
+@keyframes sparkle {
+  0% { box-shadow: 0 0 10px #ff69b4; }
+  50% { box-shadow: 0 0 30px #ff69b4; }
+  100% { box-shadow: 0 0 10px #ff69b4; }
+}
+
+.characters .card {
+  width: 300px;
+  margin: 20px;
+  padding: 30px;
+  background: #e0ffff;
+  border: 5px solid #ffa07a;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 25px;
+  box-shadow: 0 0 15px #87cefa;
+  transition: transform 0.3s;
+}
+
+.characters .card:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+
+.back-button {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  font-size: 24px;
+  background: white;
+  padding: 10px 20px;
+  border: 3px dashed hotpink;
+  cursor: pointer;
+  animation: sparkle 2s infinite;
+}
+
+.family .family-image img {
+  margin-top: 100px;
+  width: 90%;
+  border: 10px solid #ff69b4;
+  box-shadow: 0 0 50px pink;
+}
