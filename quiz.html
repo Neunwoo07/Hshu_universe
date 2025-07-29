@@ -2,61 +2,47 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>형석고 유니버스 퀴즈</title>
+    <title>형석고 유니버스 - 홈페이지</title>
     <style>
         body {
-            background: lavender;
-            font-family: 'Comic Sans MS', cursive;
+            background: pink;
             text-align: center;
+            font-family: 'Comic Sans MS', cursive;
+            animation: glitter 2s infinite;
         }
-        .question-box {
-            background: lightcyan;
-            padding: 20px;
-            border: 3px dotted blue;
-            margin: 20px;
+        h1 {
+            animation: spin 5s linear infinite;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes glitter {
+            0% { background-color: pink; }
+            50% { background-color: lightyellow; }
+            100% { background-color: pink; }
+        }
+        .button {
+            background: yellow;
+            border: 2px dashed red;
+            padding: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            animation: flash 1s infinite;
+        }
+        @keyframes flash {
+            0% { color: red; }
+            50% { color: blue; }
+            100% { color: red; }
         }
     </style>
 </head>
 <body>
-    <h1>👑 형석고 인물 퀴즈 👑</h1>
-    <p>이름을 입력하고 시작하세요</p>
-    <input type="text" id="username" placeholder="이름 입력" />
-    <button onclick="startQuiz()">시작하기</button>
-    <div id="quiz"></div>
-    <script>
-        const questions = [
-            {q: "형석고 급식실에서 모든 걸 먹어버려 퇴학당한 전설의 인물은?", a: ["전우철", "이재현", "전다은", "정자연"], c: 2},
-            {q: "꼬꼬빌 청소부이자 유통기한 연장의 마스터는 누구인가?", a: ["김광수", "연은숙", "정빅뱅", "안철근"], c: 1}
-        ];
-        let current = 0, score = 0, username = "";
-
-        function startQuiz() {
-            username = document.getElementById("username").value;
-            if (!username) return alert("이름을 입력하세요!");
-            showQuestion();
-        }
-
-        function showQuestion() {
-            const q = questions[current];
-            let html = `<div class="question-box"><h3>Q${current+1}. ${q.q}</h3>`;
-            q.a.forEach((opt, i) => {
-                html += `<div><button onclick="checkAnswer(${i})">${opt}</button></div>`;
-            });
-            html += `</div>`;
-            document.getElementById("quiz").innerHTML = html;
-        }
-
-        function checkAnswer(i) {
-            if (i === questions[current].c) score++;
-            current++;
-            if (current < questions.length) showQuestion();
-            else endQuiz();
-        }
-
-        function endQuiz() {
-            localStorage.setItem(username, score);
-            window.location.href = "ranking.html";
-        }
-    </script>
+    <h1>✨형석고 유니버스✨</h1>
+    <p>전다은에게서 급식을 지키세요!</p>
+    <p>오늘의 급식 괴담: <strong>전다은은 언제쯤 배가 부를까..?</strong></p>
+    <br>
+    <a href="quiz.html"><div class="button">✨ 인물 퀴즈 풀기</div></a>
+    <br><br>
+    <a href="ranking.html"><div class="button">🔥 오늘의 랭킹 보기</div></a>
 </body>
 </html>
