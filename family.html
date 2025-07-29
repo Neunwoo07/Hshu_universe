@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -5,24 +6,43 @@
     <title>가족 관계도</title>
     <style>
         body {
-            background: lightpink;
+            background: linear-gradient(to right, #ffcccc, #ffe6e6);
             font-family: 'Comic Sans MS', cursive;
             text-align: center;
+            animation: sparkle 4s infinite;
         }
-        img {
-            width: 90%;
-            border: 5px solid hotpink;
+        h1 {
+            color: hotpink;
+            text-shadow: 2px 2px yellow;
+        }
+        .family-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .member {
+            border: 4px dotted deeppink;
+            background: #fff0f5;
+            margin: 10px;
+            padding: 15px;
+            width: 220px;
             animation: glitter 2s infinite;
         }
         @keyframes glitter {
             0% { filter: brightness(1); }
-            50% { filter: brightness(1.4); }
+            50% { filter: brightness(1.5); }
             100% { filter: brightness(1); }
         }
     </style>
 </head>
 <body>
-    <h1>👪 형석고 가족 관계도</h1>
-    <img src="family_tree.png" alt="가족 계보도">
+    <h1>👨‍👩‍👧‍👦 형석고 가족 관계도</h1>
+    <div class="family-box">
+        <div class="member"><strong>전우철 가족</strong><br>엄마: 연은숙 (꼬꼬빌 청소부)<br>아빠: 전홍기 (백수)<br>누나: 전다은 (푸바오랑 판다처럼 살고 있음)</div>
+        <div class="member"><strong>정우주 가족</strong><br>아빠: 정빅뱅 (인민군)<br>남매: 정하늘, 정자연, 정자왕<br>엄마: 실종</div>
+        <div class="member"><strong>김수욱 가족</strong><br>형: 김광수 (미친 물, 국어 교사 역할)<br>전여친/현여친: 옆집 거주<br>부모: 미상</div>
+        <div class="member"><strong>안세형 가족</strong><br>아빠: 안철근 (풀무원 배달부)<br>엄마: 김소연 (잡혀살고 있음)<br>형: 안재혁 (폐급병장)</div>
+        <div class="member"><strong>이재현 가족</strong><br>형: 이재민 (음식 혼자 먹는 요리사)<br>부모: 미상</div>
+    </div>
 </body>
 </html>
