@@ -1,133 +1,29 @@
 
-body {
-  margin: 0;
-  font-family: 'Comic Sans MS', '굴림', cursive;
-  background: radial-gradient(circle, #fffbe6, #ffe0f0, #d0f0ff);
-  animation: shimmer 10s infinite alternate;
-  overflow-x: hidden;
-}
-
-h1.rainbow-text {
-  text-align: center;
-  font-size: 2.5rem;
-  background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: glow 2s infinite;
-}
-
-.logo-container {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-  gap: 50px;
-}
-
-.circle {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 25px pink;
-  overflow: hidden;
-}
-
-.spin {
-  animation: spin 10s linear infinite;
-}
-
-.warning, .ghost-story {
-  text-align: center;
-  font-size: 1.2rem;
-  margin-top: 10px;
-  font-weight: bold;
-  color: darkred;
-}
-
-.ghost-story {
-  color: purple;
-}
-
-.character-button, .back-button {
-  display: block;
-  margin: 30px auto;
-  padding: 15px 30px;
-  font-size: 1.2rem;
-  background: yellow;
-  border: 3px dashed hotpink;
-  text-decoration: none;
-  color: black;
-  border-radius: 15px;
-  box-shadow: 0 0 20px hotpink;
-  animation: pulse 1.5s infinite;
-  transition: transform 0.3s;
-}
-
-.character-button:hover, .back-button:hover {
-  transform: scale(1.1) rotate(-2deg);
-}
-
-.character-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
-}
-
-.back-wrapper {
-  text-align: center;
-  margin-bottom: 40px;
+@keyframes sparkle {
+  0% { text-shadow: 0 0 5px yellow; color: yellow; }
+  50% { text-shadow: 0 0 15px magenta; color: magenta; }
+  100% { text-shadow: 0 0 5px cyan; color: cyan; }
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-@keyframes glow {
-  0% { text-shadow: 0 0 5px white; }
-  100% { text-shadow: 0 0 25px yellow; }
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 10px hotpink; }
-  50% { box-shadow: 0 0 30px deeppink; }
-  100% { box-shadow: 0 0 10px hotpink; }
-}
-
-@keyframes shimmer {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-
-.card.sparkle {
-  background-color: white;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 0 15px hotpink;
-  width: 250px;
+body {
+  background: linear-gradient(45deg, #ffccff, #ccffff, #ffffcc);
+  animation: sparkle 2s infinite alternate;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
   text-align: center;
-  font-size: 1rem;
-  animation: flicker 3s infinite;
-  transition: transform 0.3s;
-}
-.card.sparkle:hover {
-  transform: scale(1.1) rotate(1deg);
-  box-shadow: 0 0 25px deeppink;
 }
 
-/* 캐릭터별 배경 색 */
-.card.kimsuuk { background: #ffe4c4; }     /* 베이지 */
-.card.ansaehyung { background: #d0f0c0; }  /* 연두 */
-.card.leejaehyun { background: #e6ccff; }  /* 연보라 */
-.card.jeonwoocheol { background: #ffd1dc; }/* 핑크 */
-.card.jungwooju { background: #ccf2ff; }   /* 하늘 */
+img.logo, img.flag {
+  width: 150px;
+  height: auto;
+  animation: spin 10s linear infinite;
+  margin: 20px;
+}
 
-@keyframes flicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.85; }
+h1, h2, h3, .glow-text {
+  animation: sparkle 1.5s infinite alternate;
 }

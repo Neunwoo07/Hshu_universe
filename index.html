@@ -4,67 +4,19 @@
 <head>
   <meta charset="UTF-8">
   <title>형석고 유니버스</title>
-  <style>
-    body {
-      background: radial-gradient(circle, #fdfd96, #ffb347);
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      text-align: center;
-      animation: sparkle 3s infinite;
-    }
-    @keyframes sparkle {
-      0%, 100% { background-color: #fffbcc; }
-      50% { background-color: #fffacd; }
-    }
-    h1 {
-      font-size: 3em;
-      color: hotpink;
-      text-shadow: 2px 2px 5px white;
-      animation: glow 1s ease-in-out infinite alternate;
-    }
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #ff69b4; }
-      to { text-shadow: 0 0 20px #ff1493; }
-    }
-    .logo, .flag {
-      width: 120px;
-      height: 120px;
-      margin: 20px;
-      animation: spin 5s linear infinite;
-    }
-    @keyframes spin {
-      from {transform: rotate(0deg);}
-      to {transform: rotate(360deg);}
-    }
-    .menu {
-      margin: 20px;
-      padding: 10px;
-      font-size: 20px;
-      border: 2px dashed deeppink;
-      background: #fff0f5;
-      display: inline-block;
-      animation: float 2s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    a {
-      text-decoration: none;
-      color: blue;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>형석고 유니버스</h1>
-  <img src="assets/logo.png" class="logo" alt="HSHU 로고">
-  <img src="assets/flag.png" class="flag" alt="HSHU 깃발">
-  <p>오늘의 급식은 꼭 전다은에게서 보호하시길…!</p>
-  <p>오늘의 급식 괴담: 전다은은 언제쯤 배가 부를까..?</p>
-
-  <div class="menu"><a href="characters.html">등장인물 소개</a></div>
-  <div class="menu"><a href="family.html">가족 관계도</a></div>
-  <div class="menu"><a href="quiz.html">인물 퀴즈 풀기</a></div>
-  <div class="menu"><a href="ranking.html">오늘의 랭킹</a></div>
+  <img src="assets/logo.png" alt="HSHU 로고" class="logo">
+  <img src="assets/flag.png" alt="HSHU 깃발" class="flag">
+  <h1 class="glow-text">형석고 유니버스에 오신 걸 환영합니다!</h1>
+  <p class="glow-text">⚠️ 오늘의 급식은 꼭 전다은에게서 보호하시길…!</p>
+  <p class="glow-text">🍚 오늘의 급식 괴담: 전다은은 언제쯤 배가 부를까..?</p>
+  <div>
+    <a href="characters.html">등장인물 소개</a><br>
+    <a href="family.html">가족 관계도</a><br>
+    <a href="quiz.html">인물 퀴즈</a><br>
+    <a href="ranking.html">오늘의 랭킹</a>
+  </div>
 </body>
 </html>
