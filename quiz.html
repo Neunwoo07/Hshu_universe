@@ -2,47 +2,98 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>형석고 유니버스 - 홈페이지</title>
+    <title>형석고 유니버스 퀴즈</title>
     <style>
         body {
-            background: pink;
-            text-align: center;
+            background: lightcyan;
             font-family: 'Comic Sans MS', cursive;
-            animation: glitter 2s infinite;
+            text-align: center;
         }
-        h1 {
-            animation: spin 5s linear infinite;
-        }
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-        @keyframes glitter {
-            0% { background-color: pink; }
-            50% { background-color: lightyellow; }
-            100% { background-color: pink; }
+        .question {
+            margin: 20px;
+            padding: 15px;
+            border: 3px dotted purple;
+            background-color: #ffffcc;
         }
         .button {
-            background: yellow;
-            border: 2px dashed red;
-            padding: 15px;
-            font-size: 20px;
+            margin: 5px;
+            padding: 10px 20px;
+            background: orange;
+            border: 2px solid red;
+            font-size: 16px;
             cursor: pointer;
-            animation: flash 1s infinite;
-        }
-        @keyframes flash {
-            0% { color: red; }
-            50% { color: blue; }
-            100% { color: red; }
         }
     </style>
 </head>
 <body>
-    <h1>✨형석고 유니버스✨</h1>
-    <p>전다은에게서 급식을 지키세요!</p>
-    <p>오늘의 급식 괴담: <strong>전다은은 언제쯤 배가 부를까..?</strong></p>
+    <h1>🎓 형석고 인물 퀴즈 🎓</h1>
+    <div id="quiz"></div>
     <br>
-    <a href="quiz.html"><div class="button">✨ 인물 퀴즈 풀기</div></a>
-    <br><br>
-    <a href="ranking.html"><div class="button">🔥 오늘의 랭킹 보기</div></a>
+    <input type="text" id="username" placeholder="이름 입력" />
+    <button onclick="submitQuiz()" class="button">제출</button>
+    <p id="scoreDisplay"></p>
+
+    <script>
+        const questions = [
+            {
+                q: "김수욱의 별명은?",
+                a: ["물돼지", "아랍인", "폭풍우", "전과자"],
+                c: 1
+            },
+            {
+                q: "전우철의 엄마는 누구?",
+                a: ["김소연", "연은숙", "이재민", "전다은"],
+                c: 1
+            },
+            {
+                q: "전다은은 왜 퇴학당했는가?",
+                a: ["지각", "싸움", "급식 혼자 다 먹어서", "선생님과 싸워서"],
+                c: 2
+            },
+            {
+                q: "정우주의 아빠는 누구?",
+                a: ["정빅뱅", "정상인", "정다정", "정자왕"],
+                c: 0
+            },
+            {
+                q: "이재현의 형은 누구?",
+                a: ["이재민", "이재혁", "안재혁", "전우철"],
+                c: 0
+            }
+        ];
+
+        let current = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            if (current >= questions.length) {
+                document.getElementById("quiz").innerHTML = "<h2>퀴즈 완료!</h2>";
+                return;
+            }
+            const q = questions[current];
+            let html = `<div class="question"><h3>${q.q}</h3>`;
+            q.a.forEach((choice, index) => {
+                html += `<button class="button" onclick="answer(${index})">${choice}</button><br>`;
+            });
+            html += "</div>";
+            document.getElementById("quiz").innerHTML = html;
+        }
+
+        function answer(choice) {
+            if (choice === questions[current].c) {
+                score++;
+            }
+            current++;
+            loadQuestion();
+        }
+
+        function submitQuiz() {
+            const name = document.getElementById("username").value || "익명";
+            localStorage.setItem("ranking_" + name, score);
+            document.getElementById("scoreDisplay").innerText = name + "님의 점수: " + score + "점!";
+        }
+
+        window.onload = loadQuestion;
+    </script>
 </body>
 </html>
