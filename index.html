@@ -1,24 +1,25 @@
 
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>형석고 유니버스</title>
-  <link rel="stylesheet" href="style.css">
+    <title>형석고 유니버스</title>
+    <style>
+        body { background-color: #ffeb3b; text-align: center; font-family: Comic Sans MS; animation: glow 1s infinite alternate; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #f06, 0 0 10px #f06, 0 0 15px #f06; }
+            to { text-shadow: 0 0 20px #f06, 0 0 25px #f06, 0 0 30px #f06; }
+        }
+        img.spin { animation: spin 5s linear infinite; width: 100px; }
+    </style>
 </head>
 <body>
-  <div class="header-images">
-    <img src="assets/logo.png" alt="HSHU 로고" class="logo">
-    <img src="assets/flag.png" alt="HSHU 깃발" class="flag">
-  </div>
-  <h1 class="glow-text">형석고 유니버스에 오신 걸 환영합니다!</h1>
-  <p class="glow-text">⚠️ 오늘의 급식은 꼭 전다은에게서 보호하시길…!</p>
-  <p class="glow-text">🍚 오늘의 급식 괴담: 전다은은 언제쯤 배가 부를까..?</p>
-  <div>
+    <h1>형석고 유니버스</h1>
+    <img src="logo.png" class="spin" alt="로고">
+    <img src="flag.png" class="spin" alt="깃발">
+    <p>오늘의 급식은 꼭 전다은에게서 보호하시길…!</p>
+    <p><strong>오늘의 괴담: 연은숙이 청소하면 왜 더 더러워질까</strong></p>
     <a href="characters.html">등장인물 소개</a><br>
-    <a href="family.html">가족 관계도</a><br>
-    <a href="quiz.html">인물 퀴즈</a><br>
-    <a href="ranking.html">오늘의 랭킹</a>
-  </div>
+    <a href="quiz.html">형석고 퀴즈 도전!</a>
 </body>
 </html>
