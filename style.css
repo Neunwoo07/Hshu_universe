@@ -34,3 +34,16 @@ img.logo, img.flag {
 h1, h2, h3, .glow-text {
   animation: sparkle 1.5s infinite alternate;
 }
+
+.character-card {
+  width: 240px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 20px;
+  padding: 15px;
+  background: #ffeeff;
+  border: 2px solid hotpink;
+  border-radius: 15px;
+  box-shadow: 0 0 12px #ff00ff;
+  animation: sparkle 2s infinite alternate;
+}
