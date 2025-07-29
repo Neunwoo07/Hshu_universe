@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>오늘의 랭킹</title>
+    <style>
+        body {
+            background: mintcream;
+            font-family: 'Comic Sans MS', cursive;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>🏆 오늘의 형석고 랭킹 🏆</h1>
+    <div id="rankings"></div>
+    <script>
+        let list = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            const val = parseInt(localStorage.getItem(key));
+            list.push({name: key, score: val});
+        }
+        list.sort((a,b) => b.score - a.score);
+        let html = "<ol>";
+        list.forEach(entry => {
+            html += `<li>${entry.name} - ${entry.score}점 (${entry.score >= 2 ? '전우철형 천재!' : '전다은형 주의'})</li>`;
+        });
+        html += "</ol>";
+        document.getElementById("rankings").innerHTML = html;
+    </script>
+</body>
+</html>

@@ -1,18 +1,48 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>형석고 유니버스</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>형석고 유니버스 - 홈페이지</title>
+    <style>
+        body {
+            background: pink;
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive;
+            animation: glitter 2s infinite;
+        }
+        h1 {
+            animation: spin 5s linear infinite;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes glitter {
+            0% { background-color: pink; }
+            50% { background-color: lightyellow; }
+            100% { background-color: pink; }
+        }
+        .button {
+            background: yellow;
+            border: 2px dashed red;
+            padding: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            animation: flash 1s infinite;
+        }
+        @keyframes flash {
+            0% { color: red; }
+            50% { color: blue; }
+            100% { color: red; }
+        }
+    </style>
 </head>
-<body class="background">
-    <div class="logo-container">
-        <div class="circle rotate"><img src="assets/images/logo.png" class="circle-img"></div>
-        <div class="circle rotate"><img src="assets/images/flag.png" class="circle-img"></div>
-    </div>
-    <p class="shiny warning">⚠️ 오늘의 급식은 꼭 전다은에게서 보호하시길…!</p>
-    <p class="shiny ghost">👻 오늘의 급식 괴담: 전다은은 언제쯤 배가 부를까..?</p>
-    <a href="family.html" class="shiny button">✨ 가족 관계도 보기 ➤</a>
+<body>
+    <h1>✨형석고 유니버스✨</h1>
+    <p>전다은에게서 급식을 지키세요!</p>
+    <p>오늘의 급식 괴담: <strong>전다은은 언제쯤 배가 부를까..?</strong></p>
+    <br>
+    <a href="quiz.html"><div class="button">✨ 인물 퀴즈 풀기</div></a>
+    <br><br>
+    <a href="ranking.html"><div class="button">🔥 오늘의 랭킹 보기</div></a>
 </body>
 </html>
