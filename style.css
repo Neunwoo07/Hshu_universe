@@ -17,11 +17,18 @@ body {
   text-align: center;
 }
 
+.header-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  margin: 20px 0;
+}
+
 img.logo, img.flag {
-  width: 150px;
+  width: 140px;
   height: auto;
   animation: spin 10s linear infinite;
-  margin: 20px;
 }
 
 h1, h2, h3, .glow-text {
