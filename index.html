@@ -1,55 +1,55 @@
+
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>형석고 유니버스 - 홈페이지</title>
-    <style>
-        body {
-            background: pink;
-            text-align: center;
-            font-family: 'Comic Sans MS', cursive;
-            animation: glitter 2s infinite;
-        }
-        h1 {
-            animation: spin 5s linear infinite;
-        }
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-        @keyframes glitter {
-            0% { background-color: pink; }
-            50% { background-color: lightyellow; }
-            100% { background-color: pink; }
-        }
-        .button {
-            background: yellow;
-            border: 2px dashed red;
-            padding: 15px;
-            font-size: 20px;
-            cursor: pointer;
-            animation: flash 1s infinite;
-        }
-        @keyframes flash {
-            0% { color: red; }
-            50% { color: blue; }
-            100% { color: red; }
-        }
-        .logo, .flag {
-            width: 150px;
-            animation: spin 10s linear infinite;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>HSHU 유니버스</title>
+  <style>
+    body {
+      background-color: pink;
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      animation: blinkBackground 3s infinite;
+    }
+    @keyframes blinkBackground {
+      0% { background-color: pink; }
+      50% { background-color: lightyellow; }
+      100% { background-color: pink; }
+    }
+    .logo {
+      width: 100px;
+      animation: spin 5s linear infinite;
+    }
+    @keyframes spin {
+      0% {transform: rotate(0deg);}
+      100% {transform: rotate(360deg);}
+    }
+    .button {
+      font-size: 20px;
+      background-color: yellow;
+      padding: 10px;
+      border: 3px dotted red;
+      cursor: pointer;
+      animation: sparkle 1.5s infinite;
+    }
+    @keyframes sparkle {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-    <img src="logo.png" class="logo" alt="로고">
-    <img src="flag.png" class="flag" alt="깃발">
-    <h1>✨형석고 유니버스✨</h1>
-    <p>전다은에게서 급식을 지키세요!</p>
-    <p>오늘의 급식 괴담: <strong>전다은은 언제쯤 배가 부를까..?</strong></p>
-    <br>
-    <a href="quiz.html"><div class="button">✨ 인물 퀴즈 풀기</div></a><br><br>
-    <a href="ranking.html"><div class="button">🔥 오늘의 랭킹 보기</div></a><br><br>
-    <a href="characters.html"><div class="button">😎 등장인물 소개</div></a><br><br>
-    <a href="family.html"><div class="button">👪 가족 관계도 보기</div></a>
+  <img src="logo.png" class="logo">
+  <img src="flag.png" class="logo">
+  <h1 style="color:blue; animation:sparkle 2s infinite;">HSHU 유니버스에 오신 걸 환영합니다!</h1>
+  <p style="color:red;">⚠️ 오늘의 급식은 꼭 전다은에게서 보호하시길…!</p>
+  <p style="color:green;">🍱 오늘의 급식 괴담: 전다은은 언제쯤 배가 부를까…?</p>
+  <div>
+    <a href="characters.html"><button class="button">등장인물 소개</button></a>
+    <a href="family.html"><button class="button">가족 관계도</button></a>
+    <a href="quiz.html"><button class="button">인물 퀴즈</button></a>
+    <a href="ranking.html"><button class="button">오늘의 랭킹</button></a>
+  </div>
 </body>
 </html>
