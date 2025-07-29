@@ -1,33 +1,39 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>오늘의 랭킹</title>
-    <style>
-        body {
-            background: mintcream;
-            font-family: 'Comic Sans MS', cursive;
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>오늘의 랭킹</title>
+  <style>
+    body {
+      background: repeating-linear-gradient(45deg, #ffe4e1, #fafad2 10px, #ffe4e1 20px);
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      color: #8b0000;
+    }
+    h1 {
+      font-size: 2.5em;
+      animation: blink 1s step-start infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    .back {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px;
+      font-size: 20px;
+      border: 2px dotted magenta;
+      background: lightyellow;
+    }
+    a {
+      text-decoration: none;
+      color: purple;
+    }
+  </style>
 </head>
 <body>
-    <h1>🏆 오늘의 형석고 랭킹 🏆</h1>
-    <div id="rankings"></div>
-    <script>
-        let list = [];
-        for (let i = 0; i < localStorage.length; i++) {
-            const key = localStorage.key(i);
-            const val = parseInt(localStorage.getItem(key));
-            list.push({name: key, score: val});
-        }
-        list.sort((a,b) => b.score - a.score);
-        let html = "<ol>";
-        list.forEach(entry => {
-            html += `<li>${entry.name} - ${entry.score}점 (${entry.score >= 2 ? '전우철형 천재!' : '전다은형 주의'})</li>`;
-        });
-        html += "</ol>";
-        document.getElementById("rankings").innerHTML = html;
-    </script>
+  <h1>오늘의 랭킹 페이지는 준비 중!</h1>
+  <div class="back"><a href="index.html">← 돌아가기</a></div>
 </body>
 </html>

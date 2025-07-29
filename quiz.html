@@ -1,99 +1,39 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>형석고 유니버스 퀴즈</title>
-    <style>
-        body {
-            background: lightcyan;
-            font-family: 'Comic Sans MS', cursive;
-            text-align: center;
-        }
-        .question {
-            margin: 20px;
-            padding: 15px;
-            border: 3px dotted purple;
-            background-color: #ffffcc;
-        }
-        .button {
-            margin: 5px;
-            padding: 10px 20px;
-            background: orange;
-            border: 2px solid red;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>인물 퀴즈</title>
+  <style>
+    body {
+      background: repeating-linear-gradient(45deg, #ffe4e1, #fafad2 10px, #ffe4e1 20px);
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      color: #8b0000;
+    }
+    h1 {
+      font-size: 2.5em;
+      animation: blink 1s step-start infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    .back {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px;
+      font-size: 20px;
+      border: 2px dotted magenta;
+      background: lightyellow;
+    }
+    a {
+      text-decoration: none;
+      color: purple;
+    }
+  </style>
 </head>
 <body>
-    <h1>🎓 형석고 인물 퀴즈 🎓</h1>
-    <div id="quiz"></div>
-    <br>
-    <input type="text" id="username" placeholder="이름 입력" />
-    <button onclick="submitQuiz()" class="button">제출</button>
-    <p id="scoreDisplay"></p>
-
-    <script>
-        const questions = [
-            {
-                q: "김수욱의 별명은?",
-                a: ["물돼지", "아랍인", "폭풍우", "전과자"],
-                c: 1
-            },
-            {
-                q: "전우철의 엄마는 누구?",
-                a: ["김소연", "연은숙", "이재민", "전다은"],
-                c: 1
-            },
-            {
-                q: "전다은은 왜 퇴학당했는가?",
-                a: ["지각", "싸움", "급식 혼자 다 먹어서", "선생님과 싸워서"],
-                c: 2
-            },
-            {
-                q: "정우주의 아빠는 누구?",
-                a: ["정빅뱅", "정상인", "정다정", "정자왕"],
-                c: 0
-            },
-            {
-                q: "이재현의 형은 누구?",
-                a: ["이재민", "이재혁", "안재혁", "전우철"],
-                c: 0
-            }
-        ];
-
-        let current = 0;
-        let score = 0;
-
-        function loadQuestion() {
-            if (current >= questions.length) {
-                document.getElementById("quiz").innerHTML = "<h2>퀴즈 완료!</h2>";
-                return;
-            }
-            const q = questions[current];
-            let html = `<div class="question"><h3>${q.q}</h3>`;
-            q.a.forEach((choice, index) => {
-                html += `<button class="button" onclick="answer(${index})">${choice}</button><br>`;
-            });
-            html += "</div>";
-            document.getElementById("quiz").innerHTML = html;
-        }
-
-        function answer(choice) {
-            if (choice === questions[current].c) {
-                score++;
-            }
-            current++;
-            loadQuestion();
-        }
-
-        function submitQuiz() {
-            const name = document.getElementById("username").value || "익명";
-            localStorage.setItem("ranking_" + name, score);
-            document.getElementById("scoreDisplay").innerText = name + "님의 점수: " + score + "점!";
-        }
-
-        window.onload = loadQuestion;
-    </script>
+  <h1>인물 퀴즈 페이지는 준비 중!</h1>
+  <div class="back"><a href="index.html">← 돌아가기</a></div>
 </body>
 </html>
