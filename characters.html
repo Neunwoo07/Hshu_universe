@@ -1,16 +1,530 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Characters</title>
+    <title>등장인물 소개 - 형석고 유니버스</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: linear-gradient(45deg, #ff6b9d, #c44ffa, #4facfe, #00f2fe);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* 반짝이는 효과 */
+        .sparkle {
+            animation: sparkle 2s linear infinite;
+            text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { 
+                text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 20px #ffff00, 0 0 30px #ffff00, 0 0 40px #ffff00;
+                transform: scale(1.05);
+            }
+        }
+        
+        /* 회전 애니메이션 */
+        .rotating {
+            animation: rotate 4s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 헤더 */
+        header {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            z-index: 10;
+        }
+        
+        .flag {
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            top: 30px;
+            right: 80px;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin: 60px 0 20px 0;
+            color: #fff;
+            font-weight: 700;
+        }
+        
+        /* 캐릭터 카드 */
+        .characters-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .character-card {
+            border: 4px solid #fff;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .character-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* 각 캐릭터별 배경 */
+        .card-3101 {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef, #fecfef);
+        }
+        
+        .card-3102 {
+            background: linear-gradient(135deg, #a8edea, #fed6e3, #d299c2);
+        }
+        
+        .card-3103 {
+            background: linear-gradient(135deg, #fbc2eb, #a6c1ee, #c2e9fb);
+        }
+        
+        .card-3104 {
+            background: linear-gradient(135deg, #fdbb2d, #22c1c3, #fdbb2d);
+        }
+        
+        .card-3105 {
+            background: linear-gradient(135deg, #ee9ca7, #ffdde1, #c2e9fb);
+        }
+        
+        .student-number {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .student-name {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+        
+        .student-nickname {
+            font-size: 1.3em;
+            color: #8e44ad;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .student-features {
+            font-size: 1.1em;
+            color: #2c3e50;
+            line-height: 1.6;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        .student-features li {
+            margin-bottom: 8px;
+            list-style-type: none;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .student-features li:before {
+            content: "🐔";
+            position: absolute;
+            left: 0;
+        }
+        
+        .student-role {
+            background: rgba(231, 76, 60, 0.8);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 1em;
+            font-weight: 600;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        
+        /* 돌아가기 버튼 */
+        .back-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #ff4081, #3f51b5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            font-size: 2em;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .back-button:hover {
+            transform: scale(1.1) rotate(360deg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* 클릭 효과 */
+        .character-card.clicked {
+            animation: cardClick 0.6s ease;
+        }
+        
+        @keyframes cardClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .characters-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 15px;
+            }
+            
+            .logo, .flag {
+                width: 60px;
+                height: 60px;
+            }
+            
+            h1 {
+                font-size: 2.2em;
+                margin: 40px 0 15px 0;
+            }
+            
+            .back-button {
+                bottom: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5em;
+            }
+        }
+        
+        /* 특수 효과 애니메이션 */
+        .special-effect {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            z-index: 1000;
+            animation: specialPop 2s ease forwards;
+            pointer-events: none;
+        }
+        
+        @keyframes specialPop {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+            20% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+            80% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>List of Characters</h1>
-    <ul>
-        <li>Character 1</li>
-        <li>Character 2</li>
-        <li>Character 3</li>
-    </ul>
+    <header>
+        <!-- 로고와 깃발 -->
+        <div class="logo rotating">
+            <div style="width: 100%; height: 100%; background: radial-gradient(circle, #ffeb3b, #ff9800); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: bold; color: #333;">HSHU</div>
+        </div>
+        
+        <div class="flag rotating">
+            <div style="width: 100%; height: 100%; background: linear-gradient(45deg, #e91e63, #9c27b0); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: white;">FLAG</div>
+        </div>
+        
+        <h1 class="sparkle">👥 등장인물 소개</h1>
+    </header>
+    
+    <div class="characters-container">
+        <!-- 안세형 (3101) -->
+        <div class="character-card card-3101" data-student="안세형" data-family="안철근">
+            <div class="student-number sparkle">3101</div>
+            <div class="student-name sparkle">안세형</div>
+            <div class="student-nickname sparkle">피부 까무잡잡한 급식 통제자</div>
+            <ul class="student-features">
+                <li>피부가 까무잡잡함</li>
+                <li>무릎에 점이 있음 (성장과 함께 커짐)</li>
+                <li>형은 폐급병장 안재혁</li>
+                <li>전우철 놀리기 1티어</li>
+                <li>아빠 안철근은 풀무원 배달부</li>
+            </ul>
+            <div class="student-role sparkle">급식 유통 통제자</div>
+        </div>
+        
+        <!-- 이재현 (3102) -->
+        <div class="character-card card-3102" data-student="이재현">
+            <div class="student-number sparkle">3102</div>
+            <div class="student-name sparkle">이재현</div>
+            <div class="student-nickname sparkle">유치한 멍청이</div>
+            <ul class="student-features">
+                <li>매우 유치함</li>
+                <li>멍청함의 결정체</li>
+                <li>키가 작음</li>
+                <li>걷기 연습이 필요함</li>
+                <li>트림을 자주 함</li>
+                <li>형 이재민은 요리사</li>
+            </ul>
+            <div class="student-role sparkle">단순함의 화신</div>
+        </div>
+        
+        <!-- 전우철 (3103) -->
+        <div class="character-card card-3103" data-student="전우철">
+            <div class="student-number sparkle">3103</div>
+            <div class="student-name sparkle">전우철</div>
+            <div class="student-nickname sparkle">존재감 없는 실험체</div>
+            <ul class="student-features">
+                <li>존재감이 거의 없음</li>
+                <li>엄마 연은숙 따라 꼬꼬빌 청소부 지원</li>
+                <li>기억이 제거됨</li>
+                <li>닭간이 이식됨</li>
+                <li>누나 전다은은 실험 실패체</li>
+            </ul>
+            <div class="student-role sparkle">실험 중심체 / 숙주</div>
+        </div>
+        
+        <!-- 정우주 (3104) -->
+        <div class="character-card card-3104" data-student="정우주">
+            <div class="student-number sparkle">3104</div>
+            <div class="student-name sparkle">정우주</div>
+            <div class="student-nickname sparkle">감정 붕괴자</div>
+            <ul class="student-features">
+                <li>한예우를 짝사랑했지만 실패</li>
+                <li>가족은 탈북자</li>
+                <li>감정을 억제하려 노력함</li>
+                <li>파괴의 시작점</li>
+                <li>아빠 정빅뱅은 인민군</li>
+            </ul>
+            <div class="student-role sparkle">감정 붕괴자 / 파괴의 시작점</div>
+        </div>
+        
+        <!-- 김수욱 (3105) -->
+        <div class="character-card card-3105" data-student="김수욱">
+            <div class="student-number sparkle">3105</div>
+            <div class="student-name sparkle">김수욱</div>
+            <div class="student-nickname sparkle">아랍인 외모의 국어교사 지망생</div>
+            <ul class="student-features">
+                <li>아랍인 같은 외모</li>
+                <li>국어교사를 꿈꿈</li>
+                <li>탈북자 가족(정우주네)에게 국어를 가르침</li>
+                <li>옆집에 '여친?'이 있음</li>
+                <li>형 김광수는 금기의 존재</li>
+            </ul>
+            <div class="student-role sparkle">국어교사 지망생</div>
+        </div>
+    </div>
+    
+    <!-- 돌아가기 버튼 -->
+    <button class="back-button sparkle" onclick="location.href='index.html'">🏠</button>
+    
+    <!-- 풀무원 광고 재생 컨트롤 -->
+    <div id="audioControl" style="position: fixed; top: 20px; right: 20px; z-index: 1000; display: none;">
+        <iframe id="youtubePlayer" width="300" height="200" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.3);"></iframe>
+        <div style="text-align: center; margin-top: 10px;">
+            <button onclick="closeAudio()" style="background: #ff4444; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">닫기</button>
+        </div>
+    </div>
+    
+    <script>
+        // 캐릭터 카드 클릭 이벤트
+        document.querySelectorAll('.character-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const studentName = this.dataset.student;
+                const familyMember = this.dataset.family;
+                
+                // 클릭 애니메이션
+                this.classList.add('clicked');
+                setTimeout(() => {
+                    this.classList.remove('clicked');
+                }, 600);
+                
+                // 특수 효과 표시
+                showSpecialEffect(studentName);
+                
+                // 안세형이나 안철근 관련 클릭 시 풀무원 광고 재생
+                if (studentName === '안세형' || familyMember === '안철근') {
+                    playPulmuwonAd();
+                }
+            });
+        });
+        
+        function showSpecialEffect(name) {
+            const effects = {
+                '안세형': '🚚 풀무원 배달!',
+                '이재현': '🍼 유치함 폭발!',
+                '전우철': '🐔 닭간 이식!',
+                '정우주': '💔 감정 붕괴!',
+                '김수욱': '📚 국어 수업!'
+            };
+            
+            const effect = document.createElement('div');
+            effect.className = 'special-effect sparkle';
+            effect.textContent = effects[name] || '✨ 특별한 효과!';
+            document.body.appendChild(effect);
+            
+            setTimeout(() => {
+                document.body.removeChild(effect);
+            }, 2000);
+        }
+        
+        function playPulmuwonAd() {
+            const audioControl = document.getElementById('audioControl');
+            const youtubePlayer = document.getElementById('youtubePlayer');
+            
+            // YouTube 임베드 URL로 변경
+            youtubePlayer.src = 'https://www.youtube.com/embed/c9qotRzQ1lc?autoplay=1&start=0';
+            audioControl.style.display = 'block';
+            
+            // 풀무원 광고 시작 알림
+            const adAlert = document.createElement('div');
+            adAlert.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(45deg, #4CAF50, #45a049);
+                color: white;
+                padding: 20px;
+                border-radius: 15px;
+                font-size: 1.5em;
+                font-weight: bold;
+                z-index: 1001;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                animation: slideIn 0.5s ease;
+            `;
+            adAlert.innerHTML = '🚚 풀무원 광고 재생! 🐔';
+            document.body.appendChild(adAlert);
+            
+            setTimeout(() => {
+                if (document.body.contains(adAlert)) {
+                    document.body.removeChild(adAlert);
+                }
+            }, 2000);
+        }
+        
+        function closeAudio() {
+            const audioControl = document.getElementById('audioControl');
+            const youtubePlayer = document.getElementById('youtubePlayer');
+            
+            youtubePlayer.src = '';
+            audioControl.style.display = 'none';
+        }
+        
+        // CSS 애니메이션 추가
+        const additionalStyle = document.createElement('style');
+        additionalStyle.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translate(-50%, -50%) scale(0);
+                    opacity: 0;
+                }
+                to {
+                    transform: translate(-50%, -50%) scale(1);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(additionalStyle);
+        
+        // 클릭 시 반짝임 효과
+        document.addEventListener('click', function(e) {
+            const sparkle = document.createElement('div');
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = e.clientX + 'px';
+            sparkle.style.top = e.clientY + 'px';
+            sparkle.style.width = '8px';
+            sparkle.style.height = '8px';
+            sparkle.style.background = '#ffeb3b';
+            sparkle.style.borderRadius = '50%';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.animation = 'sparkleClick 1s ease-out forwards';
+            sparkle.style.zIndex = '999';
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                if (document.body.contains(sparkle)) {
+                    document.body.removeChild(sparkle);
+                }
+            }, 1000);
+        });
+        
+        const clickStyle = document.createElement('style');
+        clickStyle.textContent = `
+            @keyframes sparkleClick {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(clickStyle);
+    </script>
 </body>
 </html>
