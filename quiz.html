@@ -1,1 +1,768 @@
-사용자가 제공한 quiz.html 내용
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>형석고 퀴즈 - 형석고 유니버스</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: linear-gradient(45deg, #ff6b9d, #c44ffa, #4facfe, #00f2fe);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* 반짝이는 효과 */
+        .sparkle {
+            animation: sparkle 2s linear infinite;
+            text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { 
+                text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 20px #ffff00, 0 0 30px #ffff00, 0 0 40px #ffff00;
+                transform: scale(1.05);
+            }
+        }
+        
+        /* 회전 애니메이션 */
+        .rotating {
+            animation: rotate 4s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 헤더 */
+        header {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            z-index: 10;
+        }
+        
+        .flag {
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            top: 30px;
+            right: 80px;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin: 60px 0 20px 0;
+            color: #fff;
+            font-weight: 700;
+        }
+        
+        /* 컨테이너 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 시작 화면 */
+        .start-screen {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+        
+        .start-screen h2 {
+            color: #e74c3c;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+        
+        .start-screen p {
+            color: #2c3e50;
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .name-input {
+            width: 100%;
+            max-width: 300px;
+            padding: 15px;
+            font-size: 1.2em;
+            border: 3px solid #3498db;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: 'Comic Neue', cursive;
+        }
+        
+        .start-button {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.3em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Comic Neue', cursive;
+            font-weight: 700;
+        }
+        
+        .start-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 퀴즈 화면 */
+        .quiz-screen {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+        
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+        
+        .question-counter {
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+        
+        .timer {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #e74c3c;
+        }
+        
+        .question {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            min-height: 60px;
+        }
+        
+        .answers {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .answer-button {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 1.1em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-family: 'Comic Neue', cursive;
+        }
+        
+        .answer-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .answer-button.correct {
+            background: linear-gradient(45deg, #27ae60, #229954);
+        }
+        
+        .answer-button.wrong {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+        
+        /* 결과 화면 */
+        .result-screen {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+        
+        .result-screen h2 {
+            color: #e74c3c;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        .score-display {
+            font-size: 3em;
+            color: #27ae60;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+        
+        .grade-message {
+            font-size: 1.5em;
+            color: #8e44ad;
+            margin: 20px 0;
+            line-height: 1.5;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .action-button {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Comic Neue', cursive;
+            font-weight: 600;
+        }
+        
+        .action-button:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 돌아가기 버튼 */
+        .back-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #ff4081, #3f51b5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            font-size: 2em;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .back-button:hover {
+            transform: scale(1.1) rotate(360deg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .logo, .flag {
+                width: 60px;
+                height: 60px;
+            }
+            
+            h1 {
+                font-size: 2.2em;
+                margin: 40px 0 15px 0;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            .start-screen, .quiz-screen, .result-screen {
+                padding: 25px;
+            }
+            
+            .quiz-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .back-button {
+                bottom: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5em;
+            }
+        }
+        
+        /* 쿨다운 메시지 */
+        .cooldown-message {
+            background: rgba(231, 76, 60, 0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- 로고와 깃발 -->
+        <div class="logo rotating">
+            <div style="width: 100%; height: 100%; background: radial-gradient(circle, #ffeb3b, #ff9800); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: bold; color: #333;">HSHU</div>
+        </div>
+        
+        <div class="flag rotating">
+            <div style="width: 100%; height: 100%; background: linear-gradient(45deg, #e91e63, #9c27b0); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: white;">FLAG</div>
+        </div>
+        
+        <h1 class="sparkle">❓ 형석고 퀴즈</h1>
+    </header>
+    
+    <div class="container">
+        <!-- 시작 화면 -->
+        <div class="start-screen" id="startScreen">
+            <h2 class="sparkle">🐔 형석고 유니버스 퀴즈</h2>
+            <p>꼬꼬빌의 비밀을 얼마나 알고 있나요?<br>
+            Project C.O.C.O와 형석고의 진실을 테스트해보세요!</p>
+            <div id="cooldownDiv"></div>
+            <input type="text" class="name-input" id="playerName" placeholder="이름을 입력하세요" maxlength="10">
+            <br>
+            <button class="start-button sparkle" onclick="startQuiz()">퀴즈 시작!</button>
+            <p style="margin-top: 20px; font-size: 1.1em; color: #7f8c8d;">
+                총 50문제 | 제한시간 없음 | 2시간 재응시 제한
+            </p>
+        </div>
+        
+        <!-- 퀴즈 화면 -->
+        <div class="quiz-screen" id="quizScreen">
+            <div class="quiz-header">
+                <div class="question-counter sparkle" id="questionCounter">문제 1/50</div>
+                <div class="timer sparkle" id="timer">⏰ 시간: 00:00</div>
+            </div>
+            <div class="question sparkle" id="question">문제가 여기에 표시됩니다.</div>
+            <div class="answers" id="answers">
+                <!-- 답변 버튼들이 여기에 생성됩니다 -->
+            </div>
+        </div>
+        
+        <!-- 결과 화면 -->
+        <div class="result-screen" id="resultScreen">
+            <h2 class="sparkle">🎉 퀴즈 완료!</h2>
+            <div class="score-display sparkle" id="scoreDisplay">0/50</div>
+            <div class="grade-message sparkle" id="gradeMessage"></div>
+            <div class="action-buttons">
+                <button class="action-button sparkle" onclick="saveToRanking()">📊 랭킹에 저장</button>
+                <button class="action-button sparkle" onclick="restartQuiz()">🔄 다시 도전</button>
+                <button class="action-button sparkle" onclick="goHome()">🏠 메인으로</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 돌아가기 버튼 -->
+    <button class="back-button sparkle" onclick="location.href='index.html'">🏠</button>
+    
+    <script>
+        // 퀴즈 데이터 (50문제)
+        const quizQuestions = [
+            { question: "형석고는 어느 지역에 위치해 있나요?", answers: ["충북 증평", "충남 천안", "경기 용인", "강원 춘천"], correct: 0 },
+            { question: "꼬꼬빌(COCOVILL)은 무엇을 유통하는 기업인가요?", answers: ["닭가슴살", "소고기", "돼지고기", "생선"], correct: 0 },
+            { question: "Project C.O.C.O.의 정식 명칭은?", answers: ["Cleaners Of Critical Operation", "Chicken Of Cooking Operation", "Control Of Chaos Operation", "Company Of Chicken Organization"], correct: 0 },
+            { question: "전우철의 학번은?", answers: ["3103", "3101", "3102", "3104"], correct: 0 },
+            { question: "안세형의 아빠 직업은?", answers: ["풀무원 배달부", "치킨집 사장", "학교 교사", "회사원"], correct: 0 },
+            { question: "전다은이 급식을 몇 인분 먹고 퇴학당했나요?", answers: ["04123인분", "05000인분", "03456인분", "02789인분"], correct: 0 },
+            { question: "이재현의 학번은?", answers: ["3102", "3101", "3103", "3104"], correct: 0 },
+            { question: "정우주가 짝사랑했던 사람은?", answers: ["한예우", "김예린", "박소영", "이미나"], correct: 0 },
+            { question: "김수욱이 꿈꾸는 직업은?", answers: ["국어교사", "수학교사", "영어교사", "과학교사"], correct: 0 },
+            { question: "전홍기는 어디에 진실을 남겨두었나요?", answers: ["방송실", "교무실", "급식실", "도서관"], correct: 0 },
+            { question: "안세형의 형 이름은?", answers: ["안재혁", "안재민", "안재훈", "안재성"], correct: 0 },
+            { question: "연은숙의 직업은?", answers: ["꼬꼬빌 청소부", "급식 조리사", "학교 청소부", "회사원"], correct: 0 },
+            { question: "전다은은 실험 결과 무엇이 되었나요?", answers: ["판다", "닭", "돼지", "원숭이"], correct: 0 },
+            { question: "정우주의 아빠 이름은?", answers: ["정빅뱅", "정대박", "정성공", "정희망"], correct: 0 },
+            { question: "김수욱의 형 이름은?", answers: ["김광수", "김민수", "김철수", "김영수"], correct: 0 },
+            { question: "형석고 깃봉의 모양은?", answers: ["똥 모양", "별 모양", "하트 모양", "원 모양"], correct: 0 },
+            { question: "형석고 기둥의 모양은?", answers: ["닭다리뼈", "돼지뼈", "소뼈", "생선뼈"], correct: 0 },
+            { question: "이재민의 직업은?", answers: ["요리사", "배달부", "교사", "의사"], correct: 0 },
+            { question: "전우철에게 이식된 것은?", answers: ["닭간", "닭심장", "닭폐", "닭위"], correct: 0 },
+            { question: "안세형의 특징 중 하나는?", answers: ["무릎에 점", "팔에 점", "얼굴에 점", "등에 점"], correct: 0 },
+            { question: "이재현의 특징은?", answers: ["트림을 자주 함", "재채기를 자주 함", "딸꾹질을 자주 함", "코골이를 심함"], correct: 0 },
+            { question: "정우주 가족의 출신은?", answers: ["탈북자", "중국인", "일본인", "미국인"], correct: 0 },
+            { question: "김수욱의 외모 특징은?", answers: ["아랍인 외모", "유럽인 외모", "동남아인 외모", "아프리카인 외모"], correct: 0 },
+            { question: "전다은이 출몰하는 시간은?", answers: ["점심시간(12:00~13:00)", "아침시간(08:00~09:00)", "저녁시간(18:00~19:00)", "밤시간(22:00~23:00)"], correct: 0 },
+            { question: "오늘의 괴담은?", answers: ["연은숙이 청소하면 왜 더 더러워질까", "전우철이 왜 존재감이 없을까", "안세형이 왜 전우철을 놀릴까", "이재현이 왜 유치할까"], correct: 0 },
+            { question: "형석고의 별명은?", answers: ["고아들의 성지", "학생들의 천국", "공부의 요새", "꿈의 학교"], correct: 0 },
+            { question: "안재혁의 계급은?", answers: ["병장", "상병", "일병", "이병"], correct: 0 },
+            { question: "김광수의 별명은?", answers: ["미친 물", "위험한 존재", "금기의 인물", "알 수 없는 자"], correct: 0 },
+            { question: "꼬꼬빌이 실험하는 내용은?", answers: ["인간을 닭으로 바꾸기", "닭을 인간으로 바꾸기", "동물 복제", "유전자 조작"], correct: 0 },
+            { question: "급식을 통해 무엇이 확산되나요?", answers: ["감염", "바이러스", "세균", "독소"], correct: 0 },
+            { question: "정우주의 형제자매 이름에 포함되지 않는 것은?", answers: ["자유", "하늘", "자연", "자왕"], correct: 0 },
+            { question: "전우철 놀리기 1티어는 누구?", answers: ["안세형", "이재현", "정우주", "김수욱"], correct: 0 },
+            { question: "이재현이 연습해야 하는 것은?", answers: ["걷기", "말하기", "쓰기", "듣기"], correct: 0 },
+            { question: "김수욱이 가르치는 과목은?", answers: ["국어", "수학", "영어", "과학"], correct: 0 },
+            { question: "전다은의 관계는?", answers: ["전우철의 누나", "전우철의 여동생", "전우철의 사촌", "전우철의 친구"], correct: 0 },
+            { question: "안세형의 엄마 이름은?", answers: ["김소연", "이미경", "박영희", "최수정"], correct: 0 },
+            { question: "정빅뱅의 전직은?", answers: ["인민군", "경찰", "소방관", "의사"], correct: 0 },
+            { question: "이재민의 특징은?", answers: ["맛만 본다며 전부 다 먹음", "요리를 못함", "음식을 안 먹음", "편식이 심함"], correct: 0 },
+            { question: "전홍기의 현재 상태는?", answers: ["실종", "입원", "해외거주", "직장근무"], correct: 0 },
+            { question: "김수욱 옆집에 있는 사람은?", answers: ["여친?", "친구", "할머니", "사촌"], correct: 0 },
+            { question: "꼬꼬빌의 유통 경로는?", answers: ["풀무원 배달망", "이마트 유통망", "롯데마트 유통망", "홈플러스 유통망"], correct: 0 },
+            { question: "안세형의 피부색은?", answers: ["까무잡잡", "하얀색", "노란색", "붉은색"], correct: 0 },
+            { question: "이재현의 키는?", answers: ["작음", "큼", "보통", "매우 큼"], correct: 0 },
+            { question: "정우주의 감정 상태는?", answers: ["억제 중", "폭발 직전", "안정적", "무감정"], correct: 0 },
+            { question: "전우철의 존재감은?", answers: ["거의 없음", "매우 강함", "보통", "가끔 있음"], correct: 0 },
+            { question: "형석고 공식 상징에 포함되지 않는 것은?", answers: ["달", "학교 건물", "닭 머리", "비누 거품"], correct: 0 },
+            { question: "노란 신발은 형석고의 무엇인가요?", answers: ["공식 상징", "교복", "체육복", "실내화"], correct: 0 },
+            { question: "HSHU의 정식 명칭은?", answers: ["HYUNGSEOK HIGH UNIVERSE", "HYUNGSEOK HIGH UNION", "HYUNGSEOK HIGH UNITED", "HYUNGSEOK HIGH UNIVERSITY"], correct: 0 },
+            { question: "꼬꼬빌 회장의 정체는?", answers: ["???", "연은숙", "안철근", "전홍기"], correct: 0 },
+            { question: "급식실에서 매일 등장하지만 아무도 먹지 않는 것은? (전다은 제외)", answers: ["닭가슴살", "소고기", "돼지고기", "생선"], correct: 0 },
+            { question: "김광수의 이름이 언급되면 어떤 일이 일어나나요?", answers: ["기기 오류 발생", "화면 꺼짐", "소리 안남", "아무 일 없음"], correct: 0 }
+        ];
+        
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let playerName = '';
+        let startTime = null;
+        let shuffledQuestions = [];
+        
+        // 쿨다운 체크
+        function checkCooldown() {
+            const lastAttempt = localStorage.getItem('lastQuizAttempt');
+            if (lastAttempt) {
+                const timeDiff = Date.now() - parseInt(lastAttempt);
+                const twoHours = 2 * 60 * 60 * 1000; // 2시간을 밀리초로
+                
+                if (timeDiff < twoHours) {
+                    const remainingTime = twoHours - timeDiff;
+                    const hours = Math.floor(remainingTime / (60 * 60 * 1000));
+                    const minutes = Math.floor((remainingTime % (60 * 60 * 1000)) / (60 * 1000));
+                    
+                    const cooldownDiv = document.getElementById('cooldownDiv');
+                    cooldownDiv.innerHTML = `
+                        <div class="cooldown-message sparkle">
+                            ⏰ 재응시까지 ${hours}시간 ${minutes}분 남았습니다!
+                        </div>
+                    `;
+                    
+                    document.querySelector('.start-button').disabled = true;
+                    document.querySelector('.start-button').style.opacity = '0.5';
+                    document.querySelector('.start-button').style.cursor = 'not-allowed';
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        // 퀴즈 시작
+        function startQuiz() {
+            if (!checkCooldown()) return;
+            
+            playerName = document.getElementById('playerName').value.trim();
+            if (!playerName) {
+                alert('이름을 입력해주세요!');
+                return;
+            }
+            
+            // 문제 섞기
+            shuffledQuestions = [...quizQuestions].sort(() => Math.random() - 0.5);
+            
+            currentQuestionIndex = 0;
+            score = 0;
+            startTime = Date.now();
+            
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('quizScreen').style.display = 'block';
+            
+            showQuestion();
+            updateTimer();
+        }
+        
+        // 문제 표시
+        function showQuestion() {
+            const question = shuffledQuestions[currentQuestionIndex];
+            document.getElementById('questionCounter').textContent = `문제 ${currentQuestionIndex + 1}/50`;
+            document.getElementById('question').textContent = question.question;
+            
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+            
+            question.answers.forEach((answer, index) => {
+                const button = document.createElement('button');
+                button.className = 'answer-button sparkle';
+                button.textContent = `${index + 1}. ${answer}`;
+                button.onclick = () => selectAnswer(index);
+                answersDiv.appendChild(button);
+            });
+        }
+        
+        // 답변 선택
+        function selectAnswer(selectedIndex) {
+            const question = shuffledQuestions[currentQuestionIndex];
+            const buttons = document.querySelectorAll('.answer-button');
+            
+            // 모든 버튼 비활성화
+            buttons.forEach(btn => btn.disabled = true);
+            
+            // 정답/오답 표시
+            buttons[selectedIndex].classList.add(selectedIndex === question.correct ? 'correct' : 'wrong');
+            if (selectedIndex !== question.correct) {
+                buttons[question.correct].classList.add('correct');
+            }
+            
+            // 점수 계산
+            if (selectedIndex === question.correct) {
+                score++;
+                showEffect('✅ 정답!', '#27ae60');
+            } else {
+                showEffect('❌ 오답!', '#e74c3c');
+            }
+            
+            // 다음 문제로
+            setTimeout(() => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < shuffledQuestions.length) {
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }, 1500);
+        }
+        
+        // 효과 표시
+        function showEffect(text, color) {
+            const effect = document.createElement('div');
+            effect.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 2.5em;
+                font-weight: bold;
+                color: ${color};
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+                z-index: 1000;
+                animation: effectPop 1s ease forwards;
+                pointer-events: none;
+            `;
+            effect.textContent = text;
+            document.body.appendChild(effect);
+            
+            setTimeout(() => {
+                if (document.body.contains(effect)) {
+                    document.body.removeChild(effect);
+                }
+            }, 1000);
+        }
+        
+        // 타이머 업데이트
+        function updateTimer() {
+            if (!startTime) return;
+            
+            const elapsed = Date.now() - startTime;
+            const minutes = Math.floor(elapsed / 60000);
+            const seconds = Math.floor((elapsed % 60000) / 1000);
+            
+            document.getElementById('timer').textContent = 
+                `⏰ 시간: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (document.getElementById('quizScreen').style.display !== 'none') {
+                setTimeout(updateTimer, 1000);
+            }
+        }
+        
+        // 결과 표시
+        function showResult() {
+            document.getElementById('quizScreen').style.display = 'none';
+            document.getElementById('resultScreen').style.display = 'block';
+            
+            const endTime = Date.now();
+            const totalTime = Math.floor((endTime - startTime) / 1000);
+            
+            document.getElementById('scoreDisplay').textContent = `${score}/50`;
+            
+            // 등급 메시지
+            let gradeMessage = '';
+            if (score >= 45) {
+                gradeMessage = `🏆 꼬꼬빌 CEO급! 당신은 형석고의 진정한 지배자입니다!<br>완료 시간: ${Math.floor(totalTime/60)}분 ${totalTime%60}초`;
+            } else if (score >= 40) {
+                gradeMessage = `🥇 연은숙 레벨! Project C.O.C.O의 핵심 인물이군요!<br>완료 시간: ${Math.floor(totalTime/60)}분 ${totalTime%60}초`;
+            } else if (score >= 35) {
+                gradeMessage = `🥈 안철근 레벨! 풀무원 배달부 수준의 지식을 보유하고 있습니다!<br>완료 시간: ${Math.floor(totalTime/60)}분 ${totalTime%60}초`;
+            } else if (score >= 30) {
+                gradeMessage = `🥉 안세형 레벨! 급식 통제자 정도의 실력이네요!<br>완료 시간: ${Math.floor(totalTime/60)}분 ${totalTime%60}초`;
+            } else if (score >= 25) {
+                gradeMessage = `😐 이재현 레벨! 유치하지만 나름 알고는 있네요!<br>완료 시간: ${Math.floor(totalTime/60)}분 ${totalTime%60}초`;
+            } else if (score >= 20) {
+                gradeMessage = `😕 정우주 레벨! 감정이 붕괴된 상태로 퀴즈를 본 것 같네요!<br>완료 시간: ${Math.floor(totalTime/60)}분 ${totalTime%60}초`;
+            } else if (score >= 15) {
+                gradeMessage = `😰 김수욱 레벨! 국어는 잘해도 형석고는 잘 모르시는군요!<br>완료 시간: ${Math.floor(totalTime/60)}분 ${totalTime%60}초`;
+            } else if (score >= 10) {
+                gradeMessage = `😱 전우철 레벨! 존재감처럼 점수도 거의 없네요...<br>완료 시간: ${Math.floor(totalTime/60)}분 ${totalTime%60}초`;
+            } else {
+                gradeMessage = `🤡 전다은 레벨! 실험 실패체처럼 퀴즈도 실패하셨네요... 판다가 되어버린 기분이시죠?<br>완료 시간: ${Math.floor(totalTime/60)}분 ${totalTime%60}초`;
+            }
+            
+            document.getElementById('gradeMessage').innerHTML = gradeMessage;
+            
+            // 쿨다운 설정
+            localStorage.setItem('lastQuizAttempt', Date.now().toString());
+        }
+        
+        // 랭킹에 저장
+        function saveToRanking() {
+            const endTime = Date.now();
+            const totalTime = Math.floor((endTime - startTime) / 1000);
+            
+            // 기존 랭킹 가져오기
+            let rankings = JSON.parse(localStorage.getItem('hshuRankings') || '[]');
+            
+            // 새 기록 추가
+            const newRecord = {
+                name: playerName,
+                score: score,
+                time: totalTime,
+                date: new Date().toLocaleString('ko-KR')
+            };
+            
+            rankings.push(newRecord);
+            
+            // 점수 기준으로 정렬 (높은 점수 우선, 같으면 시간 짧은 순)
+            rankings.sort((a, b) => {
+                if (a.score !== b.score) return b.score - a.score;
+                return a.time - b.time;
+            });
+            
+            // 상위 100개만 유지
+            rankings = rankings.slice(0, 100);
+            
+            localStorage.setItem('hshuRankings', JSON.stringify(rankings));
+            
+            alert('랭킹에 저장되었습니다! 🎉');
+            
+            // 랭킹 페이지로 이동
+            setTimeout(() => {
+                location.href = 'rank.html';
+            }, 1000);
+        }
+        
+        // 다시 도전
+        function restartQuiz() {
+            if (!checkCooldown()) {
+                alert('아직 재응시 시간이 되지 않았습니다!');
+                return;
+            }
+            
+            document.getElementById('resultScreen').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'block';
+            document.getElementById('playerName').value = playerName;
+        }
+        
+        // 메인으로
+        function goHome() {
+            location.href = 'index.html';
+        }
+        
+        // CSS 애니메이션 추가
+        const additionalStyle = document.createElement('style');
+        additionalStyle.textContent = `
+            @keyframes effectPop {
+                0% {
+                    transform: translate(-50%, -50%) scale(0);
+                    opacity: 0;
+                }
+                50% {
+                    transform: translate(-50%, -50%) scale(1.2);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translate(-50%, -50%) scale(1);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(additionalStyle);
+        
+        // 페이지 로드 시 쿨다운 체크
+        window.addEventListener('load', checkCooldown);
+        
+        // 클릭 시 반짝임 효과
+        document.addEventListener('click', function(e) {
+            const sparkle = document.createElement('div');
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = e.clientX + 'px';
+            sparkle.style.top = e.clientY + 'px';
+            sparkle.style.width = '8px';
+            sparkle.style.height = '8px';
+            sparkle.style.background = '#ffeb3b';
+            sparkle.style.borderRadius = '50%';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.animation = 'sparkleClick 1s ease-out forwards';
+            sparkle.style.zIndex = '999';
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                if (document.body.contains(sparkle)) {
+                    document.body.removeChild(sparkle);
+                }
+            }, 1000);
+        });
+        
+        const clickStyle = document.createElement('style');
+        clickStyle.textContent = `
+            @keyframes sparkleClick {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(clickStyle);
+    </script>
+</body>
+</html>
