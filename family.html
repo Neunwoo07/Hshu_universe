@@ -1,1 +1,677 @@
-사용자가 제공한 family.html 내용
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가족 관계도 - 형석고 유니버스</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: linear-gradient(45deg, #ff6b9d, #c44ffa, #4facfe, #00f2fe);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            overflow-x: auto;
+            padding: 20px;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* 반짝이는 효과 */
+        .sparkle {
+            animation: sparkle 2s linear infinite;
+            text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { 
+                text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 20px #ffff00, 0 0 30px #ffff00, 0 0 40px #ffff00;
+                transform: scale(1.05);
+            }
+        }
+        
+        /* 회전 애니메이션 */
+        .rotating {
+            animation: rotate 4s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 헤더 */
+        header {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            z-index: 10;
+        }
+        
+        .flag {
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            top: 30px;
+            right: 80px;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin: 60px 0 20px 0;
+            color: #fff;
+            font-weight: 700;
+        }
+        
+        /* 가족 관계도 컨테이너 */
+        .family-tree {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow-x: auto;
+        }
+        
+        .family-group {
+            margin-bottom: 40px;
+            padding: 25px;
+            border: 3px solid;
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        /* 각 가족별 테마 색상 */
+        .jeon-family {
+            border-color: #e74c3c;
+            background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+        }
+        
+        .ahn-family {
+            border-color: #3498db;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+        }
+        
+        .lee-family {
+            border-color: #2ecc71;
+            background: linear-gradient(135deg, #55efc4, #00b894);
+        }
+        
+        .jung-family {
+            border-color: #f39c12;
+            background: linear-gradient(135deg, #fdcb6e, #e17055);
+        }
+        
+        .kim-family {
+            border-color: #9b59b6;
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+        }
+        
+        .family-title {
+            font-size: 2em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            position: relative;
+        }
+        
+        .family-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .member-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #34495e;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .member-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .member-name {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #e74c3c;
+            margin-bottom: 8px;
+        }
+        
+        .member-relation {
+            font-size: 1.1em;
+            color: #8e44ad;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .member-job {
+            background: #34495e;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .member-features {
+            font-size: 0.9em;
+            color: #2c3e50;
+            text-align: left;
+            line-height: 1.4;
+        }
+        
+        .member-features li {
+            list-style-type: none;
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .member-features li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        /* 연결선 스타일 */
+        .connection-line {
+            position: absolute;
+            background: #34495e;
+            z-index: 1;
+        }
+        
+        /* 돌아가기 버튼 */
+        .back-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #ff4081, #3f51b5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            font-size: 2em;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .back-button:hover {
+            transform: scale(1.1) rotate(360deg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .logo, .flag {
+                width: 60px;
+                height: 60px;
+            }
+            
+            h1 {
+                font-size: 2.2em;
+                margin: 40px 0 15px 0;
+            }
+            
+            .family-tree {
+                padding: 20px;
+                margin: 0 10px;
+            }
+            
+            .family-members {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-button {
+                bottom: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- 로고와 깃발 -->
+        <div class="logo rotating">
+            <div style="width: 100%; height: 100%; background: radial-gradient(circle, #ffeb3b, #ff9800); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: bold; color: #333;">HSHU</div>
+        </div>
+        
+        <div class="flag rotating">
+            <div style="width: 100%; height: 100%; background: linear-gradient(45deg, #e91e63, #9c27b0); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: white;">FLAG</div>
+        </div>
+        
+        <h1 class="sparkle">👨‍👩‍👧 가족 관계도</h1>
+    </header>
+    
+    <div class="family-tree">
+        <!-- 전씨 가족 -->
+        <div class="family-group jeon-family">
+            <div class="family-title sparkle">🏠 전씨 가족 (Project C.O.C.O 핵심 가족)</div>
+            <div class="family-members">
+                <div class="member-card">
+                    <div class="member-name sparkle">연은숙</div>
+                    <div class="member-relation">전우철·전다은 엄마</div>
+                    <div class="member-job">꼬꼬빌 청소부</div>
+                    <ul class="member-features">
+                        <li>Project C.O.C.O 실행 책임자</li>
+                        <li>청소하면 더 더러워짐</li>
+                        <li>실험의 핵심 인물</li>
+                    </ul>
+                </div>
+                <div class="member-card">
+                    <div class="member-name sparkle">전홍기</div>
+                    <div class="member-relation">전우철 아빠</div>
+                    <div class="member-job">내부고발자</div>
+                    <ul class="member-features">
+                        <li>방송실에 진실을 남김</li>
+                        <li>현재 실종 상태</li>
+                        <li>꼬꼬빌의 진실을 알고 있었음</li>
+                    </ul>
+                </div>
+                <div class="member-card">
+                    <div class="member-name sparkle">전우철</div>
+                    <div class="member-relation">아들 (3103)</div>
+                    <div class="member-job">학생 / 실험체</div>
+                    <ul class="member-features">
+                        <li>존재감 없음</li>
+                        <li>기억 제거됨</li>
+                        <li>닭간 이식 받음</li>
+                    </ul>
+                </div>
+                <div class="member-card">
+                    <div class="member-name sparkle">전다은</div>
+                    <div class="member-relation">딸 (전우철 누나)</div>
+                    <div class="member-job">실험 실패체</div>
+                    <ul class="member-features">
+                        <li>급식 04123인분 섭취</li>
+                        <li>닭이 아닌 판다가 됨</li>
+                        <li>점심시간에 출몰</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 안씨 가족 -->
+        <div class="family-group ahn-family">
+            <div class="family-title sparkle">🚚 안씨 가족 (풀무원 유통망)</div>
+            <div class="family-members">
+                <div class="member-card">
+                    <div class="member-name sparkle">안철근</div>
+                    <div class="member-relation">안세형 아빠</div>
+                    <div class="member-job">풀무원 배달부</div>
+                    <ul class="member-features">
+                        <li>꼬꼬빌 유통 경로 담당</li>
+                        <li>닭가슴살 유통의 핵심</li>
+                        <li>매일 형석고 방문</li>
+                    </ul>
+                </div>
+                <div class="member-card">
+                    <div class="member-name sparkle">김소연</div>
+                    <div class="member-relation">안세형 엄마</div>
+                    <div class="member-job">주부</div>
+                    <ul class="member-features">
+                        <li>안세형에게 휘둘림</li>
+                        <li>감정이 불안정함</li>
+                        <li>가족 상황을 모름</li>
+                    </ul>
+                </div>
+                <div class="member-card">
+                    <div class="member-name sparkle">안재혁</div>
+                    <div class="member-relation">안세형 형</div>
+                    <div class="member-job">폐급병장</div>
+                    <ul class="member-features">
+                        <li>자주 탈영함</li>
+                        <li>군복 입고 학교 출몰</li>
+                        <li>문제적 인물</li>
+                    </ul>
+                </div>
+                <div class="member-card">
+                    <div class="member-name sparkle">안세형</div>
+                    <div class="member-relation">아들 (3101)</div>
+                    <div class="member-job">학생 / 급식 통제자</div>
+                    <ul class="member-features">
+                        <li>피부 까무잡잡</li>
+                        <li>무릎에 커지는 점</li>
+                        <li>전우철 놀리기 1티어</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 이씨 가족 -->
+        <div class="family-group lee-family">
+            <div class="family-title sparkle">🍳 이씨 가족 (요리사 집안)</div>
+            <div class="family-members">
+                <div class="member-card">
+                    <div class="member-name sparkle">이재민</div>
+                    <div class="member-relation">이재현 형</div>
+                    <div class="member-job">요리사</div>
+                    <ul class="member-features">
+                        <li>"맛만 본다"며 전부 다 먹음</li>
+                        <li>음식에 대한 이상한 집착</li>
+                        <li>동생과 대조적</li>
+                    </ul>
+                </div>
+                <div class="member-card">
+                    <div class="member-name sparkle">이재현</div>
+                    <div class="member-relation">아들 (3102)</div>
+                    <div class="member-job">학생</div>
+                    <ul class="member-features">
+                        <li>극도로 유치함</li>
+                        <li>멍청함의 결정체</li>
+                        <li>키 작음, 걷기 연습 필요</li>
+                        <li>트림을 자주 함</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 정씨 가족 (탈북자) -->
+        <div class="family-group jung-family">
+            <div class="family-title sparkle">🇰🇵 정씨 가족 (탈북자 가족)</div>
+            <div class="family-members">
+                <div class="member-card">
+                    <div class="member-name sparkle">정빅뱅</div>
+                    <div class="member-relation">정우주 아빠</div>
+                    <div class="member-job">전 인민군</div>
+                    <ul class="member-features">
+                        <li>가족과 함께 탈북</li>
+                        <li>과거를 숨기고 살아감</li>
+                        <li>아들의 감정 문제 걱정</li>
+                    </ul>
+                </div>
+                <div class="member-card">
+                    <div class="member-name sparkle">정우주</div>
+                    <div class="member-relation">아들 (3104)</div>
+                    <div class="member-job">학생 / 감정 붕괴자</div>
+                    <ul class="member-features">
+                        <li>한예우 짝사랑 실패</li>
+                        <li>감정 억제 중</li>
+                        <li>파괴의 시작점</li>
+                    </ul>
+                </div>
+                <div class="member-card">
+                    <div class="member-name sparkle">정하늘·자연·자왕</div>
+                    <div class="member-relation">정우주 형제자매</div>
+                    <div class="member-job">학생들</div>
+                    <ul class="member-features">
+                        <li>김수욱에게 국어 배움</li>
+                        <li>탈북자 신분</li>
+                        <li>적응 중</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 김씨 가족 -->
+        <div class="family-group kim-family">
+            <div class="family-title sparkle">📚 김씨 가족 (금기의 가족)</div>
+            <div class="family-members">
+                <div class="member-card">
+                    <div class="member-name sparkle">김수욱</div>
+                    <div class="member-relation">아들 (3105)</div>
+                    <div class="member-job">학생 / 국어교사 지망</div>
+                    <ul class="member-features">
+                        <li>아랍인 외모</li>
+                        <li>탈북자 가족에게 국어 교육</li>
+                        <li>옆집에 '여친?' 존재</li>
+                    </ul>
+                </div>
+                <div class="member-card" style="background: #2c3e50; color: white;">
+                    <div class="member-name sparkle" style="color: #e74c3c;">김광수</div>
+                    <div class="member-relation" style="color: #ecf0f1;">김수욱 형</div>
+                    <div class="member-job" style="background: #e74c3c;">금기의 존재</div>
+                    <ul class="member-features" style="color: #ecf0f1;">
+                        <li>이름 언급 시 기기 오류 발생</li>
+                        <li>'미친 물'이라 불림</li>
+                        <li>정체불명의 존재</li>
+                        <li>⚠️ 접근 금지 ⚠️</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 돌아가기 버튼 -->
+    <button class="back-button sparkle" onclick="location.href='index.html'">🏠</button>
+    
+    <script>
+        // 멤버 카드 클릭 이벤트
+        document.querySelectorAll('.member-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const memberName = this.querySelector('.member-name').textContent;
+                
+                // 김광수 클릭 시 특별한 효과
+                if (memberName === '김광수') {
+                    triggerGlitch();
+                    return;
+                }
+                
+                // 일반 클릭 효과
+                this.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+                
+                // 특별한 캐릭터별 효과
+                showFamilyEffect(memberName);
+            });
+        });
+        
+        function showFamilyEffect(name) {
+            const effects = {
+                '연은숙': '🧹 청소하면 더 더러워져!',
+                '전홍기': '📻 진실이 방송실에...',
+                '전우철': '🐔 닭간 이식 완료!',
+                '전다은': '🐼 판다가 되어버림!',
+                '안철근': '🚚 풀무원 배달 중!',
+                '안세형': '😎 급식 통제 중!',
+                '안재혁': '🪖 탈영병 출몰!',
+                '이재민': '🍳 맛만 본다며 다 먹음!',
+                '이재현': '🍼 유치함 폭발!',
+                '정빅뱅': '🇰🇵 인민군 출신!',
+                '정우주': '💔 감정 붕괴 중!',
+                '김수욱': '📚 국어 선생님!'
+            };
+            
+            const effect = document.createElement('div');
+            effect.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 2em;
+                font-weight: bold;
+                color: #fff;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+                z-index: 1000;
+                animation: familyEffect 2s ease forwards;
+                pointer-events: none;
+            `;
+            effect.textContent = effects[name] || '✨ 가족의 비밀!';
+            document.body.appendChild(effect);
+            
+            setTimeout(() => {
+                if (document.body.contains(effect)) {
+                    document.body.removeChild(effect);
+                }
+            }, 2000);
+        }
+        
+        function triggerGlitch() {
+            // 김광수 클릭 시 글리치 효과
+            const glitchOverlay = document.createElement('div');
+            glitchOverlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: black;
+                color: red;
+                z-index: 9999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 3em;
+                font-weight: bold;
+                animation: glitch 2s ease;
+            `;
+            glitchOverlay.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="animation: textGlitch 0.1s infinite;">⚠️ 시스템 오류 ⚠️</div>
+                    <div style="font-size: 0.5em; margin-top: 20px; animation: textGlitch 0.15s infinite;">
+                        김광수 정보 접근 불가<br>
+                        미친 물 경고<br>
+                        3초 후 복구...
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(glitchOverlay);
+            
+            // 화면 깜빡임 효과
+            let flickerCount = 0;
+            const flickerInterval = setInterval(() => {
+                document.body.style.filter = flickerCount % 2 === 0 ? 'invert(1)' : 'invert(0)';
+                flickerCount++;
+                if (flickerCount > 10) {
+                    clearInterval(flickerInterval);
+                    document.body.style.filter = 'invert(0)';
+                }
+            }, 100);
+            
+            setTimeout(() => {
+                if (document.body.contains(glitchOverlay)) {
+                    document.body.removeChild(glitchOverlay);
+                }
+            }, 3000);
+        }
+        
+        // CSS 애니메이션 추가
+        const additionalStyle = document.createElement('style');
+        additionalStyle.textContent = `
+            @keyframes familyEffect {
+                0% {
+                    transform: translate(-50%, -50%) scale(0);
+                    opacity: 0;
+                }
+                20% {
+                    transform: translate(-50%, -50%) scale(1.2);
+                    opacity: 1;
+                }
+                80% {
+                    transform: translate(-50%, -50%) scale(1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translate(-50%, -50%) scale(0);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes glitch {
+                0%, 100% { opacity: 1; }
+                10% { opacity: 0.8; transform: translate(-2px, 1px); }
+                20% { opacity: 1; transform: translate(1px, -1px); }
+                30% { opacity: 0.9; transform: translate(-1px, 2px); }
+                40% { opacity: 1; transform: translate(2px, -2px); }
+                50% { opacity: 0.8; transform: translate(-2px, -1px); }
+                60% { opacity: 1; transform: translate(1px, 1px); }
+                70% { opacity: 0.9; transform: translate(-1px, -2px); }
+                80% { opacity: 1; transform: translate(2px, 1px); }
+                90% { opacity: 0.8; transform: translate(-2px, -1px); }
+            }
+            
+            @keyframes textGlitch {
+                0% { color: red; }
+                25% { color: cyan; }
+                50% { color: yellow; }
+                75% { color: magenta; }
+                100% { color: red; }
+            }
+        `;
+        document.head.appendChild(additionalStyle);
+        
+        // 클릭 시 반짝임 효과
+        document.addEventListener('click', function(e) {
+            const sparkle = document.createElement('div');
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = e.clientX + 'px';
+            sparkle.style.top = e.clientY + 'px';
+            sparkle.style.width = '8px';
+            sparkle.style.height = '8px';
+            sparkle.style.background = '#ffeb3b';
+            sparkle.style.borderRadius = '50%';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.animation = 'sparkleClick 1s ease-out forwards';
+            sparkle.style.zIndex = '999';
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                if (document.body.contains(sparkle)) {
+                    document.body.removeChild(sparkle);
+                }
+            }, 1000);
+        });
+        
+        const clickStyle = document.createElement('style');
+        clickStyle.textContent = `
+            @keyframes sparkleClick {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(clickStyle);
+    </script>
+</body>
+</html>
